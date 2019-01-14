@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Auto Disp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="OneFragment">Fragment One</string>
+    <string name="TwoFragment">Fragment Two</string>
+
+    <string name="switchHC">"HC-" only</string>
+    <string name="reload_List">Reload</string>
+    <string name="contentDescriptionLogo">App Logo</string>
+    <string name="connect">Connect</string>
+    <string name="currentDevice">Current device</string>
+    <string name="selectDevice">Please select an arduino device to connect</string>
+
+    <string name="runtimeString">Runtime</string>
+    <string name="pedalString">Pedal Position</string>
+    <string name="remainingString">Remaining Fuel</string>
+    <string name="vMaxString">V-Max</string>
+    <string name="accelerationString">Acceleration</string>
+    <string name="engineLoadString">Engine Load</string>
+    <string name="temperatureString">Temperature</string>
+    <string name="shiftString">Shift</string>
+    <string name="drehzahl">Drehzahl</string>
+
+
+    <string name="welcomeDiagTitle">Welcome!</string>
+    <string name="welcomeDiagMsg">In order to maximize the time you will be able to enjoy using our app, please agree to not control your phone while driving\n Hanno, Dennis, Laslo and Marco</string>
+    <string name="welcomeButtonAccept">Will do so!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>
