@@ -20,4 +20,4 @@ Built by
   - [Marco Aigner](https://github.com/DerMarco/)
   - Laslo Welz
   - Dennis Hofmann
-  - Hanno Frenzel
+  - [Hanno Frenzel](https://github.com/HannoF/)
