@@ -11,7 +11,7 @@ Users can switch between these two modes seamlessly using the tabs at the top of
 <p align="center"><img src="https://i.imgur.com/X3XliBz.jpg"></p>
 
 ## Implementation
-*data cruise* works by connecting an Arduino computer to a car's OBD diagnosis port.  
+*data cruise* works by connecting an Arduino computer to a car's OBD2 diagnosis port.  
 The Arduino then communicates with the app installed on the user's Android device via Bluetooth, transmitting diagnosis data in real-time. The application displays the received data to the user and gives driving recommendations based off of it.
 
 ## Team
