@@ -18,6 +18,6 @@ The Arduino then communicates with the app installed on the user's Android devic
 Built by
 
   - [Marco Aigner](https://github.com/DerMarco/)
-  - Laslo Welz
+  - [Laslo Welz](https://github.com/LasHarry/)
   - Dennis Hofmann
   - [Hanno Frenzel](https://github.com/HannoF/)
