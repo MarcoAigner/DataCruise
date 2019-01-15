@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
 
     private int[] tabColors ={
             R.color.lightGreen,
-            R.color.materialRed
+            R.color.lightMaterialRed
     };
 
     public MainActivity() {
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -110,10 +110,25 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         //Create Bluetooth Manager to handle the bluetooth connection
         createBtManager();
 
+        //Connect on activity startup
         initializeConnection();
 
 
     }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        mBTManager.cancel();
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        mBTManager.connect(mBluetoothAddress);
+    }
+
+
 
 
 
@@ -225,6 +240,8 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         mVelocity = "";
         mEngineLoad = "";
         mTemperature = "";
+
+        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/abel_regular.ttf");
 
 
 
@@ -390,6 +407,12 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     private void initializeConnection(){
         mBTManager.connect(mBluetoothAddress);
     }
+
+
+
+
+
+
 
 
 

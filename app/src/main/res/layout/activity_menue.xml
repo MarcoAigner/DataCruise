@@ -27,21 +27,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.888"
-        app:useMaterialThemeColors="true"/>
+        app:useMaterialThemeColors="true"
+        android:fontFamily="@font/abel_regular"
+        android:textSize="16sp"
+        android:outlineAmbientShadowColor="@color/colorPrimary"
+        android:textColorHighlight="@color/colorPrimary"
+        android:outlineSpotShadowColor="@color/colorPrimary"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:fontFamily="@font/abel_regular"
         android:text="@string/selectDevice"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
-        android:textSize="15sp"
+        android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="@+id/materialButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
@@ -80,7 +86,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        android:hint="@string/currentDevice">
+        android:hint="@string/currentDevice"
+        app:boxBackgroundColor="@color/lightColorPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInput"
@@ -97,9 +104,12 @@
             android:cursorVisible="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
-
+            app:hintAnimationEnabled="true"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimaryDark"
+            android:fontFamily="@font/abel_regular"
+            android:textSize="20sp"
+            android:scrollbarTrackHorizontal="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -126,6 +136,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/abel_regular"
+        android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.888" />
 
@@ -140,6 +152,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/connect"
+        android:fontFamily="@font/abel_regular"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

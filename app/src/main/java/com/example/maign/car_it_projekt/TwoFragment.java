@@ -112,14 +112,11 @@ public class TwoFragment extends Fragment {
     }
 
     private void configureSpeedMeter() {
-        mSpeedoMeterSport.setSpeedometerBackColor(Color.GRAY);
-        mSpeedoMeterSport.setSpeedometerColor(Color.RED);
         mSpeedoMeterSport.setMinMaxSpeed((float) 0.0, (float) 250.0);
         mSpeedoMeterSport.setUnitUnderSpeedText(false);
-        mSpeedoMeterSport.setSpeedTextColor(Color.WHITE);
         mSpeedoMeterSport.setSpeedTextSize((float) 100.0);
         mSpeedoMeterSport.setUnitTextSize((float) 100.0);
-        mSpeedoMeterSport.setUnitTextColor(Color.WHITE);
+
 
 
     }
@@ -143,7 +140,7 @@ public class TwoFragment extends Fragment {
     public void handleRpm(String rpm){
         double doubleRpm = Double.parseDouble(rpm.substring(1));
         doubleRpm *= 100;
-        mTextRpm.setText(doubleRpm +" U/min");
+        mTextRpm.setText(doubleRpm +" rpm");
     }
 
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Auto Disp</string>
+    <string name="app_name">Data Cruise</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="OneFragment">Fragment One</string>
@@ -20,11 +20,11 @@
     <string name="engineLoadString">Engine Load</string>
     <string name="temperatureString">Temperature</string>
     <string name="shiftString">Shift</string>
-    <string name="drehzahl">Drehzahl</string>
+    <string name="drehzahl">Rpm</string>
 
 
     <string name="welcomeDiagTitle">Welcome!</string>
-    <string name="welcomeDiagMsg">In order to maximize the time you will be able to enjoy using our app, please agree to not control your phone while driving\n Hanno, Dennis, Laslo and Marco</string>
+    <string name="welcomeDiagMsg">In order to maximize the time you will be able to enjoy using our app, please agree to not control your phone while driving\n\nHanno, Dennis, Laslo and Marco</string>
     <string name="welcomeButtonAccept">Will do so!</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

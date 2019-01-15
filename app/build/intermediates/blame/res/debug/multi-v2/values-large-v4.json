@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\MAign\\Desktop\\CarIT_Projekt\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-large-v4\\values-large-v4.xml",
+            "outputFile": "C:\\src\\AS\\DataCruise\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-large-v4\\values-large-v4.xml",
             "map": [
                 {
                     "source": "C:\\Users\\MAign\\.gradle\\caches\\transforms-1\\files-1.1\\material-1.1.0-alpha02.aar\\5662fb84759f6ebf391b4a7bbb88a32b\\res\\values-large-v4\\values-large-v4.xml",

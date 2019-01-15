@@ -37,7 +37,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
                         android:layout_margin="10dp"
-                        app:sv_centerCircleColor="@color/design_default_color_primary_dark"
+                        app:sv_centerCircleColor="@color/colorPrimary"
                         app:sv_highSpeedColor="@color/colorPrimary"
                         app:sv_lowSpeedColor="@color/colorPrimary"
                         app:sv_lowSpeedPercent="26"
@@ -49,7 +49,7 @@
                         app:sv_textColor="@color/colorPrimary"
                         app:sv_speedTextColor="@color/colorPrimary"
                         app:sv_speedTextSize="30sp"
-                        app:sv_unit="U/min"/>
+                        app:sv_unit="rpm"/>
 
 
                 </RelativeLayout>
@@ -73,7 +73,13 @@
                         android:layout_centerVertical="true"
                         android:layout_margin="10dp"
                         android:hint="@string/runtimeString"
-                        app:hintTextColor="@color/darkGreen">
+                        app:hintTextColor="@color/darkGreen"
+                        app:hintEnabled="true"
+                        app:hintAnimationEnabled="true"
+                        android:textAlignment="center"
+                        android:ellipsize="start"
+                        android:gravity="center"
+                        app:boxBackgroundColor="@color/lightGreen">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/runtime"
@@ -84,9 +90,13 @@
                             android:cursorVisible="false"
                             android:focusable="false"
                             android:focusableInTouchMode="false"
-                            android:textColor="@color/lightGreen"
-                            android:textSize="40sp"
+                            android:textColor="@color/darkGreen"
+                            android:textSize="27sp"
                             android:textAlignment="center"
+                            android:gravity="center"
+                            android:ellipsize="start"
+                            android:inputType="textMultiLine"
+                            android:fontFamily="@font/abel_regular"
                             />
 
 
@@ -106,7 +116,11 @@
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
                         android:layout_margin="10dp"
-                        android:hint="@string/pedalString">
+                        android:hint="@string/pedalString"
+                        app:hintTextColor="@color/darkGreen"
+                        app:hintEnabled="true"
+                        app:boxBackgroundColor="@color/lightGreen"
+                        android:textAlignment="center">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/text_pedal"
@@ -117,10 +131,14 @@
                             android:cursorVisible="false"
                             android:focusable="false"
                             android:focusableInTouchMode="false"
-                            android:textColor="@color/lightGreen"
-                            android:textColorHint="@color/darkGreen"
-                            android:textSize="40sp"
+                            android:textColor="@color/darkGreen"
+                            android:textSize="27sp"
+                            android:inputType="textMultiLine"
                             android:textAlignment="center"
+                            android:gravity="center"
+                            android:ellipsize="start"
+                            android:fontFamily="@font/abel_regular"
+
 
                             />
 
@@ -148,7 +166,11 @@
                         android:layout_margin="10dp"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:hint="@string/remainingString">
+                        android:hint="@string/remainingString"
+                        app:hintTextColor="@color/darkGreen"
+                        app:hintEnabled="true"
+                        android:textAlignment="center"
+                        app:boxBackgroundColor="@color/lightGreen">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/text_remaining"
@@ -159,10 +181,12 @@
                             android:cursorVisible="false"
                             android:focusable="false"
                             android:focusableInTouchMode="false"
-                            android:textColor="@color/lightGreen"
-                            android:textColorHint="@color/lightGreen"
-                            android:textSize="40sp"
+                            android:textColor="@color/darkGreen"
+                            android:textSize="27sp"
                             android:textAlignment="center"
+                            android:gravity="center"
+                            android:ellipsize="start"
+                            android:fontFamily="@font/abel_regular"
 
                             />
 

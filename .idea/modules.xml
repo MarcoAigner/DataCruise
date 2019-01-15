@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CarIT_Projekt.iml" filepath="$PROJECT_DIR$/CarIT_Projekt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataCruise.iml" filepath="$PROJECT_DIR$/DataCruise.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

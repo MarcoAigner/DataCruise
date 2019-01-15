@@ -1,11 +1,12 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:typeface">serif</item>
     </style>
 
 
@@ -18,9 +19,22 @@
     </style>
 
 
+
+    <style name="AppTheme.Launcher">
+
+        <item name="android:windowBackground">@drawable/launch_screen_drawable</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+
+
+
+
+    </style>
+
+
+
     <style name="MyMaterialTheme" parent="MyMaterialTheme.Base"></style>
 
-    <style name="MyMaterialTheme.Base" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="MyMaterialTheme.Base" parent="Theme.MaterialComponents.Light.NoActionBar">
 
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -30,8 +44,6 @@
 
 
     </style>
-
-
 
 
 </resources>
