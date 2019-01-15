@@ -8,7 +8,7 @@ It has two modes:
 **Eco mode** gives you recommendations for when to shift, stats about remaining fuel and similiar information.  
 **Sports mode** shows important information like engine load, temperature or revs per minute.  
 Users can switch between these two modes seamlessly using the tabs at the top of their screen.
-<p align="center"><img src="https://i.imgur.com/X3XliBz.jpg"></p>
+<p align="center"><img src="https://i.imgur.com/WMihwCF.jpg"></p>
 
 ## Implementation
 *data cruise* works by connecting an Arduino computer to a car's on-board diagnostics port (OBD2).  
