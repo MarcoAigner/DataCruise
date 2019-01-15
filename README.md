@@ -5,8 +5,11 @@
 ## About
 This app was built as a university project for the course "Car IT" of studies "Information Management Automotive" at University of Applied Sciences Neu-Ulm.  
 It provides two modes:  
+
 **Eco mode** aids in driving more fuel efficently by providing information about the current rpm, shift advice and similar information.
+
 **Sports mode** provides information useful for a sporty driving style. Keeps track of the engine load, (max-) speed, rpm and other.
+
 Users can switch between these two modes seamlessly using the tabs at the top of their screen.
 <p align="center"><img src="https://i.imgur.com/WMihwCF.jpg"></p>
 
@@ -26,10 +29,10 @@ Built by
   - [Hanno Frenzel](https://github.com/HannoF/)
   
   ## Links
-  *YouTube Video showcasing the app:*
+  YouTube Video showcasing the app:
   
   https://www.youtube.com/watch?v=pH8dUQXGjCs
   
-  *Thingspeak server:* 
+  Thingspeak server: 
   
   https://thingspeak.com/channels/676477-
