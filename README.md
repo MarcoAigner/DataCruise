@@ -4,15 +4,18 @@
 
 ## About
 This app was built as a university project for the course "Car IT" of studies "Information Management Automotive" at University of Applied Sciences Neu-Ulm.  
-It has two modes:  
-**Eco mode** gives you recommendations for when to shift, stats about remaining fuel and similiar information.  
-**Sports mode** shows important information like engine load, temperature or revs per minute.  
+It provides two modes:  
+**Eco mode** aids in driving more fuel efficently by providing information about the current rpm, shift advice and similar information.
+**Sports mode** provides information useful for a sporty driving style. Keeps track of the engine load, (max-) speed, rpm and other.
 Users can switch between these two modes seamlessly using the tabs at the top of their screen.
 <p align="center"><img src="https://i.imgur.com/WMihwCF.jpg"></p>
 
 ## Implementation
-*data cruise* works by connecting an Arduino computer to a car's on-board diagnostics port (OBD2).  
-The Arduino then communicates with the app installed on the user's Android device via Bluetooth, transmitting diagnosis data in real-time. The application displays the received data to the user and gives driving recommendations based off of it.
+*data cruise* works by connecting an Arduino computer to a car's on-board diagnostics port (OBD2).
+The Arduino then communicates with the app installed on the user's Android device via Bluetooth, transmitting diagnosis data in real-time. The application displays the received data to the user and provides driving recommendations based off of it.
+If the driver continues to drive with either too high or too low rpm for a certain amount of time, this event will be saved on a thingspeak server.
+
+As the OBD Port is a standardized diagnostics interface, this app can be used with any car (programmed arduino computer required).
 
 ## Team
 Built by
@@ -21,3 +24,12 @@ Built by
   - [Laslo Welz](https://github.com/LasHarry/)
   - Dennis Hofmann
   - [Hanno Frenzel](https://github.com/HannoF/)
+  
+  ## Links
+  *YouTube Video showcasing the app:*
+  
+  https://www.youtube.com/watch?v=pH8dUQXGjCs
+  
+  *Thingspeak server:* 
+  
+  https://thingspeak.com/channels/676477-
