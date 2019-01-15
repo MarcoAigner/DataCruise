@@ -73,37 +73,37 @@ public final class R {
     public static final class id {
         private id() {}
 
-        public static final int BOTTOM = 0x7f080001;
-        public static final int BOTTOM_CENTER = 0x7f080002;
-        public static final int BOTTOM_LEFT = 0x7f080003;
-        public static final int BOTTOM_RIGHT = 0x7f080004;
-        public static final int CENTER = 0x7f080005;
-        public static final int FLOAT = 0x7f080009;
-        public static final int HORIZONTAL = 0x7f08000b;
-        public static final int HalfLineIndicator = 0x7f08000c;
-        public static final int INTEGER = 0x7f08000d;
-        public static final int KiteIndicator = 0x7f08000e;
-        public static final int LEFT = 0x7f08000f;
-        public static final int LineIndicator = 0x7f080010;
-        public static final int NORMAL = 0x7f080012;
-        public static final int NeedleIndicator = 0x7f080014;
-        public static final int NoIndicator = 0x7f080015;
-        public static final int NormalIndicator = 0x7f080016;
-        public static final int NormalSmallIndicator = 0x7f080017;
-        public static final int QuarterLineIndicator = 0x7f080018;
-        public static final int RIGHT = 0x7f080019;
-        public static final int SpindleIndicator = 0x7f08001f;
-        public static final int TOP = 0x7f080020;
-        public static final int TOP_CENTER = 0x7f080021;
-        public static final int TOP_LEFT = 0x7f080022;
-        public static final int TOP_RIGHT = 0x7f080023;
-        public static final int TriangleIndicator = 0x7f080024;
-        public static final int VERTICAL = 0x7f080025;
+        public static final int BOTTOM = 0x7f090001;
+        public static final int BOTTOM_CENTER = 0x7f090002;
+        public static final int BOTTOM_LEFT = 0x7f090003;
+        public static final int BOTTOM_RIGHT = 0x7f090004;
+        public static final int CENTER = 0x7f090005;
+        public static final int FLOAT = 0x7f090009;
+        public static final int HORIZONTAL = 0x7f09000b;
+        public static final int HalfLineIndicator = 0x7f09000c;
+        public static final int INTEGER = 0x7f09000d;
+        public static final int KiteIndicator = 0x7f09000e;
+        public static final int LEFT = 0x7f09000f;
+        public static final int LineIndicator = 0x7f090010;
+        public static final int NORMAL = 0x7f090012;
+        public static final int NeedleIndicator = 0x7f090014;
+        public static final int NoIndicator = 0x7f090015;
+        public static final int NormalIndicator = 0x7f090016;
+        public static final int NormalSmallIndicator = 0x7f090017;
+        public static final int QuarterLineIndicator = 0x7f090018;
+        public static final int RIGHT = 0x7f090019;
+        public static final int SpindleIndicator = 0x7f09001f;
+        public static final int TOP = 0x7f090020;
+        public static final int TOP_CENTER = 0x7f090021;
+        public static final int TOP_LEFT = 0x7f090022;
+        public static final int TOP_RIGHT = 0x7f090023;
+        public static final int TriangleIndicator = 0x7f090024;
+        public static final int VERTICAL = 0x7f090025;
     }
     public static final class string {
         private string() {}
 
-        public static final int app_name = 0x7f0d001e;
+        public static final int app_name = 0x7f0e001e;
     }
     public static final class styleable {
         private styleable() {}

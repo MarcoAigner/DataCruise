@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:2:1-34:12
-INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:2:1-34:12
-INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:2:1-34:12
-INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:2:1-34:12
+ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:2:1-34:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.0-alpha3] C:\Users\MAign\.gradle\caches\transforms-1\files-1.1\constraintlayout-2.0.0-alpha3.aar\3cedc5f9b45591f6f6e09f91c8851a7a\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.material:material:1.1.0-alpha02] C:\Users\MAign\.gradle\caches\transforms-1\files-1.1\material-1.1.0-alpha02.aar\5662fb84759f6ebf391b4a7bbb88a32b\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.1.0-alpha01] C:\Users\MAign\.gradle\caches\transforms-1\files-1.1\appcompat-1.1.0-alpha01.aar\0de6942fd9e3e34c94c8166bb173c4a1\AndroidManifest.xml:17:1-22:12
@@ -40,41 +40,41 @@ MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] C:\Users\MAign\.gradl
 MERGED from [androidx.core:core:1.1.0-alpha01] C:\Users\MAign\.gradle\caches\transforms-1\files-1.1\core-1.1.0-alpha01.aar\53966888d0a59b5dfb4640b019fdb335\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\MAign\.gradle\caches\transforms-1\files-1.1\lifecycle-runtime-2.0.0.aar\e4c693875dd6d579aa7aef4a4a3f7778\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0-alpha01] C:\Users\MAign\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0-alpha01.aar\dcdaee3ae6e38a06caddfa7e9bbacc8e\AndroidManifest.xml:17:1-25:12
-INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:2:1-34:12
-INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:2:1-34:12
-INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:2:1-34:12
 	package
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:3:5-47
-		INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:3:5-47
+		INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml
+		INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:2:1-34:12
-		INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml
+		INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:2:1-34:12
+		INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml
 	android:versionCode
-		INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:2:1-34:12
-		INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml
+		INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:2:1-34:12
+		INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:2:11-69
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.BLUETOOTH
-ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:5:5-68
+ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:5:5-68
 	android:name
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:5:22-65
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:5:22-65
 uses-permission#android.permission.BLUETOOTH_ADMIN
-ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:6:5-74
+ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:6:5-74
 	android:name
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:6:22-71
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:6:22-71
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:7:5-81
+ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:7:5-81
 	android:name
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:7:22-78
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:7:22-78
 uses-permission#android.permission.INTERNET
-ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:8:5-66
+ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:8:5-66
 	android:name
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:8:22-64
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:8:22-64
 application
-ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:10:5-32:19
+ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:10:5-32:19
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.0-alpha3] C:\Users\MAign\.gradle\caches\transforms-1\files-1.1\constraintlayout-2.0.0-alpha3.aar\3cedc5f9b45591f6f6e09f91c8851a7a\AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.0-alpha3] C:\Users\MAign\.gradle\caches\transforms-1\files-1.1\constraintlayout-2.0.0-alpha3.aar\3cedc5f9b45591f6f6e09f91c8851a7a\AndroidManifest.xml:9:5-20
 MERGED from [com.google.android.material:material:1.1.0-alpha02] C:\Users\MAign\.gradle\caches\transforms-1\files-1.1\material-1.1.0-alpha02.aar\5662fb84759f6ebf391b4a7bbb88a32b\AndroidManifest.xml:22:5-20
@@ -90,47 +90,47 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0-alpha01] C:\
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.1.0-alpha01] C:\Users\MAign\.gradle\caches\transforms-1\files-1.1\core-1.1.0-alpha01.aar\53966888d0a59b5dfb4640b019fdb335\AndroidManifest.xml:22:18-86
 	android:supportsRtl
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:15:9-35
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:15:9-35
 	android:label
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:13:9-41
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:13:9-41
 	android:roundIcon
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:14:9-54
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:14:9-54
 	android:icon
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:12:9-43
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:12:9-43
 	android:allowBackup
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:11:9-35
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:16:9-47
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:16:9-49
 activity#com.example.maign.car_it_projekt.MainActivity
-ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:17:9-18:51
+ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:17:9-18:51
 	android:screenOrientation
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:18:13-49
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:18:13-49
 	android:name
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:17:19-79
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:17:19-79
 activity#com.example.maign.car_it_projekt.MenuActivity
-ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:19:9-28:20
+ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:19:9-28:20
 	android:screenOrientation
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:20:13-49
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:20:13-49
 	android:name
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:19:19-79
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:19:19-79
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:22:13-26:29
+ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:22:13-26:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:23:17-69
+ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:23:17-69
 	android:name
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:23:25-66
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:23:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:25:17-77
+ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:25:17-77
 	android:name
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:25:27-74
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:25:27-74
 activity#com.example.maign.car_it_projekt.AppStartActivity
-ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:29:9-31:20
+ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:29:9-31:20
 	android:name
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml:29:19-83
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml:29:19-83
 uses-sdk
-INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml
+INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml
+INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.0-alpha3] C:\Users\MAign\.gradle\caches\transforms-1\files-1.1\constraintlayout-2.0.0-alpha3.aar\3cedc5f9b45591f6f6e09f91c8851a7a\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.0-alpha3] C:\Users\MAign\.gradle\caches\transforms-1\files-1.1\constraintlayout-2.0.0-alpha3.aar\3cedc5f9b45591f6f6e09f91c8851a7a\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.android.material:material:1.1.0-alpha02] C:\Users\MAign\.gradle\caches\transforms-1\files-1.1\material-1.1.0-alpha02.aar\5662fb84759f6ebf391b4a7bbb88a32b\AndroidManifest.xml:20:5-44
@@ -203,13 +203,13 @@ MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\MAign\.gradle\
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\MAign\.gradle\caches\transforms-1\files-1.1\lifecycle-runtime-2.0.0.aar\e4c693875dd6d579aa7aef4a4a3f7778\AndroidManifest.xml:20:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0-alpha01] C:\Users\MAign\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0-alpha01.aar\dcdaee3ae6e38a06caddfa7e9bbacc8e\AndroidManifest.xml:20:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0-alpha01] C:\Users\MAign\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0-alpha01.aar\dcdaee3ae6e38a06caddfa7e9bbacc8e\AndroidManifest.xml:20:5-44
-INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml
+INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml
+INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml
+		INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml
+		INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\MAign\Desktop\CarIT_Projekt\app\src\main\AndroidManifest.xml
+		INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml
+		ADDED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml
+		INJECTED from C:\src\AS\DataCruise\app\src\main\AndroidManifest.xml

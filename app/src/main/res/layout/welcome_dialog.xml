@@ -6,7 +6,7 @@
 
     <ImageView
         android:id="@+id/welcomeImage"
-        android:layout_width="306dp"
+        android:layout_width="236dp"
         android:layout_height="233dp"
         android:layout_gravity="center"
         android:src="@drawable/welcome_image_group" />

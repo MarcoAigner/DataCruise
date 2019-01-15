@@ -262,13 +262,13 @@ public class OneFragment extends Fragment {
         if (rpm > 30) {
             mShiftImage.setImageResource(R.drawable.shift_up);
             mRpmCounter++;
-            if(mRpmCounter > 4){
+            if(mRpmCounter > 8){
                 sendToThinkSpeak(1);
                 mRpmCounter = 0;
             }
         } else if (rpm < 15) {
             mShiftImage.setImageResource(R.drawable.shift_down);
-            if(mRpmCounter > 4){
+            if(mRpmCounter > 8){
                 sendToThinkSpeak(0);
                 mRpmCounter = 0;
             }

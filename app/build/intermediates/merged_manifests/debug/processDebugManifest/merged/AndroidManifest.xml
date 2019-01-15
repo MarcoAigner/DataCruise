@@ -21,7 +21,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/MyMaterialTheme" >
+        android:testOnly="true"
+        android:theme="@style/AppTheme.Launcher" >
         <activity
             android:name="com.example.maign.car_it_projekt.MainActivity"
             android:screenOrientation="portrait" />

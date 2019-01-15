@@ -23,6 +23,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="43dp"
                 android:layout_weight="1">
 
                 <RelativeLayout
@@ -38,6 +39,11 @@
                         android:layout_margin="10dp"
                         app:sv_speedTextPosition="BOTTOM_RIGHT"
                         app:sv_withTremble="false"
+                        app:sv_speedometerColor="@color/lightMaterialRed"
+                        app:sv_speedometerBackColor="@color/colorPrimary"
+                        app:sv_speedTextColor="@color/white"
+                        app:sv_unitTextColor="@color/white"
+                        android:fontFamily="@font/abel_regular"
 
 
                         />
@@ -50,6 +56,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1">
 
                 <RelativeLayout
@@ -63,7 +70,10 @@
                         android:layout_margin="10dp"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:hint="@string/vMaxString">
+                        android:hint="@string/vMaxString"
+                        app:hintTextColor="@color/materialRed"
+                        app:hintEnabled="true"
+                        app:boxBackgroundColor="@color/lightMaterialRed">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/text_v_max"
@@ -75,9 +85,12 @@
                             android:focusable="false"
                             android:focusableInTouchMode="false"
                             android:textColor="@color/materialRed"
-                            android:textColorHint="@color/materialRed"
-                            android:textSize="40sp"
+                            android:textSize="27sp"
+                            android:inputType="textMultiLine"
                             android:textAlignment="center"
+                            android:gravity="center"
+                            android:ellipsize="start"
+                            android:fontFamily="@font/abel_regular"
 
                             />
 
@@ -98,7 +111,10 @@
                         android:layout_margin="10dp"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:hint="@string/drehzahl">
+                        android:hint="@string/drehzahl"
+                        app:hintTextColor="@color/materialRed"
+                        app:hintEnabled="true"
+                        app:boxBackgroundColor="@color/lightMaterialRed">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/text_rpm"
@@ -111,8 +127,12 @@
                             android:focusableInTouchMode="false"
                             android:textColor="@color/materialRed"
                             android:textColorHint="@color/materialRed"
-                            android:textSize="40sp"
+                            android:textSize="27sp"
+                            android:inputType="textMultiLine"
                             android:textAlignment="center"
+                            android:gravity="center"
+                            android:ellipsize="start"
+                            android:fontFamily="@font/abel_regular"
 
                             />
 
@@ -127,7 +147,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_weight="1">
 
                 <RelativeLayout
@@ -141,7 +160,10 @@
                         android:layout_margin="10dp"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:hint="@string/engineLoadString">
+                        android:hint="@string/engineLoadString"
+                        app:hintTextColor="@color/materialRed"
+                        app:hintEnabled="true"
+                        app:boxBackgroundColor="@color/lightMaterialRed">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/text_engine_load"
@@ -154,8 +176,12 @@
                             android:focusableInTouchMode="false"
                             android:textColor="@color/materialRed"
                             android:textColorHint="@color/materialRed"
-                            android:textSize="40sp"
+                            android:textSize="27sp"
+                            android:inputType="textMultiLine"
                             android:textAlignment="center"
+                            android:gravity="center"
+                            android:ellipsize="start"
+                            android:fontFamily="@font/abel_regular"
 
                             />
 
@@ -176,7 +202,10 @@
                         android:layout_margin="10dp"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:hint="@string/temperatureString">
+                        android:hint="@string/temperatureString"
+                        app:hintTextColor="@color/materialRed"
+                        app:hintEnabled="true"
+                        app:boxBackgroundColor="@color/lightMaterialRed">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/text_temperature"
@@ -189,8 +218,12 @@
                             android:focusableInTouchMode="false"
                             android:textColor="@color/materialRed"
                             android:textColorHint="@color/materialRed"
-                            android:textSize="40sp"
+                            android:textSize="27sp"
+                            android:inputType="textMultiLine"
                             android:textAlignment="center"
+                            android:gravity="center"
+                            android:ellipsize="start"
+                            android:fontFamily="@font/abel_regular"
 
                             />
 
