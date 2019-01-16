@@ -32,8 +32,8 @@ Built by
   YouTube Video showcasing the app:
   
  <a href="http://www.youtube.com/watch?feature=player_embedded&v=pH8dUQXGjCs
-" target="_blank"><img src="http://img.youtube.com/vi/pH8dUQXGjCs/0.jpg" 
-alt="Data Cruise YouTube Preview" width="240" height="180" border="10" /></a>
+" target="_blank"><img src="https://i.imgur.com/WMihwCF.jpg" 
+alt="Data Cruise YouTube Preview" width="1280" height="720" border="30" /></a>
   
   Thingspeak server: 
   
