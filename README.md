@@ -31,7 +31,9 @@ Built by
   ## Links
   YouTube Video showcasing the app:
   
-  https://www.youtube.com/watch?v=pH8dUQXGjCs
+ <a href="http://www.youtube.com/watch?feature=player_embedded&v=https://www.youtube.com/watch?v=pH8dUQXGjCs
+" target="_blank"><img src="http://img.youtube.com/vi/https://www.youtube.com/watch?v=pH8dUQXGjCs/0.jpg" 
+alt="Data Cruise V1.0" width="240" height="180" border="10" /></a>
   
   Thingspeak server: 
   
