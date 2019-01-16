@@ -30,7 +30,7 @@ Built by
 
   - [Marco Aigner](https://github.com/DerMarco/)
   - [Laslo Welz](https://github.com/LasHarry/)
-  - Dennis Hofmann
+  - [Dennis Hofmann](https://github.com/Dennis-Hofmann)
   - [Hanno Frenzel](https://github.com/HannoF/)
   
   ## Additional Links
