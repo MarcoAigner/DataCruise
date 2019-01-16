@@ -31,7 +31,7 @@ Built by
   ## Links
   YouTube Video showcasing the app:
   
-  https://www.youtube.com/watch?v=pH8dUQXGjCs?target=blank
+  https://www.youtube.com/watch?v=pH8dUQXGjCs
   
   Thingspeak server: 
   
