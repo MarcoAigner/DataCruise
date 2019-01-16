@@ -15,7 +15,7 @@ Users can switch between these two modes seamlessly using the tabs at the top of
 Click the image below to view a showcase on Youtube:
   
  <a href="http://www.youtube.com/watch?feature=player_embedded&v=pH8dUQXGjCs
-" target="_blank"><img src="https://i.imgur.com/WMihwCF.jpg" 
+" target="blank"><img src="https://i.imgur.com/WMihwCF.jpg" 
 alt="Data Cruise YouTube Preview" width="1280" height="720" border="30" /></a>
 
 ## Implementation
