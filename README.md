@@ -11,7 +11,12 @@ It provides two modes:
 **Sports mode** provides information useful for a sporty driving style. Keeps track of the engine load, (max-) speed, rpm and other.
 
 Users can switch between these two modes seamlessly using the tabs at the top of their screen.
-<p align="center"><img src="https://i.imgur.com/WMihwCF.jpg"></p>
+
+YouTube Video showcasing the app:
+  
+ <a href="http://www.youtube.com/watch?feature=player_embedded&v=pH8dUQXGjCs
+" target="_blank"><img src="https://i.imgur.com/WMihwCF.jpg" 
+alt="Data Cruise YouTube Preview" width="1280" height="720" border="30" /></a>
 
 ## Implementation
 *data cruise* works by connecting an Arduino computer to a car's on-board diagnostics port (OBD2).
@@ -28,12 +33,7 @@ Built by
   - Dennis Hofmann
   - [Hanno Frenzel](https://github.com/HannoF/)
   
-  ## Links
-  YouTube Video showcasing the app:
-  
- <a href="http://www.youtube.com/watch?feature=player_embedded&v=pH8dUQXGjCs
-" target="_blank"><img src="https://i.imgur.com/WMihwCF.jpg" 
-alt="Data Cruise YouTube Preview" width="1280" height="720" border="30" /></a>
+  ## Additional Links
   
   Thingspeak server: 
   
