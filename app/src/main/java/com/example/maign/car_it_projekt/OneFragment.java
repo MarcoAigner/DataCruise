@@ -206,13 +206,13 @@ public class OneFragment extends Fragment {
         Toast.makeText(mThisFragmentView.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
     }
 
-    public void handleRpm(String rpmValue) {
+    public void handleRpm(String rpmValue, double currentSpeed) {
         try {
             //mShortenedString = rpmValue.substring(1);
             Log.d("OneFrag RPM Value:", rpmValue);
             float currentRoundsPerMinute = Float.parseFloat(rpmValue.substring(1));
             Log.d("Eco Activity", "Reached starts with A, Drehzahl: " + currentRoundsPerMinute);
-            giveShiftReccomendation(Math.round(currentRoundsPerMinute));
+            giveShiftReccomendation(Math.round(currentRoundsPerMinute),currentSpeed);
             mSpeedometerEco.speedTo(currentRoundsPerMinute);
 
         } catch (Exception e) {
@@ -227,7 +227,7 @@ public class OneFragment extends Fragment {
             mShortenedString = runtimeValue.substring(1);
             double runtime = Float.parseFloat(mShortenedString);
             runtime /= 60;
-            NumberFormat formatter = new DecimalFormat("#0");
+            NumberFormat formatter = new DecimalFormat("#0.0");
             mTextRuntime.setText(formatter.format(runtime) + "\nminutes");
         } catch (Exception e) {
             Log.d("OneFrag Handle Runtime", e.toString());
@@ -237,15 +237,19 @@ public class OneFragment extends Fragment {
     public void handlePedalPosition(String pedalValue) {
         try {
             mShortenedString = pedalValue.substring(1);
+            //int pedalPosition = Integer.parseInt(mShortenedString);
             mTextPedal.setText(mShortenedString + " %");
         } catch (Exception e) {
             showErrorToast(e);
         }
     }
 
-    public void handleRemaining(String remainingValue) {
-        mShortenedString = remainingValue.substring(1);
-        mTextRemaining.setText(mShortenedString + " %");
+    public void handleOutsideTemp(String temp) {
+        mShortenedString = temp.substring(1);
+        Log.d("Remaining fuel", mShortenedString);
+        double currentTemp = Double.parseDouble(temp.substring(1));
+        currentTemp /= 10;
+        mTextRemaining.setText(currentTemp + " °C");
     }
 
 
@@ -258,7 +262,7 @@ public class OneFragment extends Fragment {
     /**
      * Depending on the current rpm, the app suggests to shift up or downwards
      */
-    private void giveShiftReccomendation(int rpm) {
+    private void giveShiftReccomendation(int rpm, double speed) {
         if (rpm > 30) {
             mShiftImage.setImageResource(R.drawable.shift_up);
             mRpmCounter++;
@@ -267,11 +271,19 @@ public class OneFragment extends Fragment {
                 mRpmCounter = 0;
             }
         } else if (rpm < 15) {
-            mShiftImage.setImageResource(R.drawable.shift_down);
-            if(mRpmCounter > 8){
-                sendToThinkSpeak(0);
-                mRpmCounter = 0;
-            }
+           try{
+               if(speed <= 10){
+                  mShiftImage.setImageResource(R.drawable.shift_ok);
+               }else{
+                   mShiftImage.setImageResource(R.drawable.shift_down);
+                   if(mRpmCounter > 8){
+                       sendToThinkSpeak(0);
+                       mRpmCounter = 0;
+                   }
+               }
+           }catch (Exception e){
+
+           }
         } else {
             mShiftImage.setImageResource(R.drawable.shift_ok);
             mRpmCounter = 0;
@@ -300,6 +312,13 @@ public class OneFragment extends Fragment {
 
 // Add the request to the RequestQueue.
         queue.add(stringRequest);
+    }
+
+    public void resetEcoValues(){
+        mSpeedometerEco.speedTo((float) 0.0);
+        mTextRuntime.setText("");
+        mTextPedal.setText("");
+        mTextRemaining.setText("");
     }
 
 

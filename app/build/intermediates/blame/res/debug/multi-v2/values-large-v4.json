@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\src\\AS\\DataCruise\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-large-v4\\values-large-v4.xml",
+            "outputFile": "C:\\src\\HNU\\DataCruise\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-large-v4\\values-large-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\MAign\\.gradle\\caches\\transforms-1\\files-1.1\\material-1.1.0-alpha02.aar\\5662fb84759f6ebf391b4a7bbb88a32b\\res\\values-large-v4\\values-large-v4.xml",
+                    "source": "C:\\Users\\MAign\\.gradle\\caches\\transforms-1\\files-1.1\\material-1.1.0-alpha02.aar\\5133c8ee42e0f90c9f84426c4cb2c385\\res\\values-large-v4\\values-large-v4.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\MAign\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-1.1.0-alpha01.aar\\0de6942fd9e3e34c94c8166bb173c4a1\\res\\values-large-v4\\values-large-v4.xml",
+                    "source": "C:\\Users\\MAign\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-1.1.0-alpha01.aar\\81129ad6e6fa1b08566372f59587e4b7\\res\\values-large-v4\\values-large-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",

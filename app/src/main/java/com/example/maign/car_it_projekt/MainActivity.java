@@ -1,24 +1,14 @@
 package com.example.maign.car_it_projekt;
 
 
-import android.content.Context;
 import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 
 import android.util.Log;
 
 import android.view.View;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -70,6 +60,9 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     //Sport Values
     private String mVelocity, mAcceleration, mEngineLoad, mTemperature;
 
+    //Saves the current speed
+    private double mSpeed;
+
 
     //Small array in which the tabs icons are stored
     private int[] tabIcons = {
@@ -120,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     protected void onStop(){
         super.onStop();
         mBTManager.cancel();
+        resetValuesOnDisconnect();
     }
 
     @Override
@@ -256,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     @Override
     public void onEcoSent(String msg) {
        if(msg.startsWith("A")){
-           oneFrag.handleRpm(msg);
+           oneFrag.handleRpm(msg,mSpeed);
 
        }
 
@@ -271,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
        }
 
        if(msg.startsWith("D")){
-           oneFrag.handleRemaining(msg);
+           oneFrag.handleOutsideTemp(msg);
        }
 
 
@@ -291,6 +285,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         }
 
         if(msg.startsWith("E")){
+            mSpeed = Double.parseDouble(msg.substring(1));
             twoFrag.handleSpeed(msg);
         }
 
@@ -351,6 +346,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         mBTHandler = new BTMsgHandler() {
             @Override
             void receiveMessage(String msg) {
+                Log.d("Received value:", msg);
                 onEcoSent(msg);
                 onSportSent(msg);
 
@@ -408,6 +404,10 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         mBTManager.connect(mBluetoothAddress);
     }
 
+    private void resetValuesOnDisconnect(){
+        oneFrag.resetEcoValues();
+        twoFrag.resetSportValues();
+    }
 
 
 
