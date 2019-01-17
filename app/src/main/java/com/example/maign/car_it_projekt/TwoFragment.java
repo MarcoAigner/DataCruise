@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.ProgressiveGauge;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 //import info.androidhive.materialtabs.R;
 
 
@@ -140,7 +143,16 @@ public class TwoFragment extends Fragment {
     public void handleRpm(String rpm){
         double doubleRpm = Double.parseDouble(rpm.substring(1));
         doubleRpm *= 100;
-        mTextRpm.setText(doubleRpm +" rpm");
+        NumberFormat formatter = new DecimalFormat("#0.0");
+        mTextRpm.setText(formatter.format(doubleRpm) +" rpm");
+    }
+
+    public void resetSportValues(){
+        mSpeedoMeterSport.speedTo((float)0.0);
+        mTextRpm.setText("");
+        mTextEngineLoad.setText("");
+        mTextTemperature.setText("");
+        vMax = 0;
     }
 
 
