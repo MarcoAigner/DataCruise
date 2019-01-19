@@ -24,6 +24,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
@@ -31,10 +32,9 @@ public class MenuActivity extends AppCompatActivity {
 
     //Xml elements
     private ListView mListView;
-    private SwitchMaterial mSwitch;
+
     private TextInputEditText mTextInputEditText;
     private MaterialButton mConnectButton;
-    private MaterialButton mReloadButton;
 
 
     //Listener variables
@@ -85,6 +85,8 @@ public class MenuActivity extends AppCompatActivity {
      * Getting the bluetooth adapter
      */
     private void setupElements() {
+        SwitchMaterial mSwitch;
+        MaterialButton mReloadButton;
         mListView = findViewById(R.id.listView);
         mTextInputEditText = findViewById(R.id.textInput);
         mSwitch = findViewById(R.id.switchHC);
@@ -98,6 +100,7 @@ public class MenuActivity extends AppCompatActivity {
 
         mReloadButton.setOnClickListener(setReloadListener());
         mConnectButton.setOnClickListener(setSwitchToTabsListener());
+        mSwitch.setChecked(true);
         mSwitch.setOnCheckedChangeListener(setSwitchOnChangeListener());
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -138,7 +141,7 @@ public class MenuActivity extends AppCompatActivity {
 
 
     private DialogInterface.OnClickListener createAcceptWelcomeListener() {
-        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+        return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
@@ -153,8 +156,6 @@ public class MenuActivity extends AppCompatActivity {
 
             }
         };
-
-        return listener;
     }
 
 
@@ -190,19 +191,13 @@ public class MenuActivity extends AppCompatActivity {
         } else {
 
 
-            mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mArduinoList);
+            mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mArduinoList);
             mListView.setAdapter(mAdapter);
             mListView.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
         }
     }
 
-    /**
-     * Method to extract all 'HC*' Arduino devices from the greater allDevices list
-     * Put this code into a separate method to not having to rerun it again on its parent method's rerun
-     *
-     * @param extractFromList
-     * @param extractIntoList
-     */
+
     private void extractArduinoDevices(ArrayList<String> extractFromList, ArrayList<String> extractIntoList) {
         for (String string : extractFromList) {
 
@@ -225,20 +220,15 @@ public class MenuActivity extends AppCompatActivity {
      * @return reloadListener
      */
     private MaterialButton.OnClickListener setReloadListener() {
-        View.OnClickListener listener = new View.OnClickListener() {
+        return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pairedDevicesLists();
             }
         };
-        return listener;
     }
 
-    /**
-     * Method that returns onClick behaviour for the connect button.
-     * In this case, an intent to the mainActivity is created and the bluetoothAddress is stored into it
-     * @return
-     */
+
     private View.OnClickListener setSwitchToTabsListener() {
         mSwitchToTabsListener = new View.OnClickListener() {
             @Override
@@ -253,23 +243,17 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * Method that returns the onChecked behaviour for the switch
-     * If activated it fills the list view with the allDevices list
-     * In reverse, only the 'HC' devices are used
-     * @return
-     */
     private CompoundButton.OnCheckedChangeListener setSwitchOnChangeListener() {
         mSwitchOnChangeListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked == false) {
-                    mAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, mArduinoList);
+                if (isChecked) {
+                    mAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, mArduinoList);
                     mListView.setAdapter(mAdapter);
                     mListView.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
 
-                } else if (isChecked == true) {
-                    mAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, mAllDevicesList);
+                } else {
+                    mAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, mAllDevicesList);
                     mListView.setAdapter(mAdapter);
                     mListView.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
                 }
@@ -299,7 +283,7 @@ public class MenuActivity extends AppCompatActivity {
 
 
             try {
-                mTextInputEditText.setText(mDeviceName + "\n" + mBtAddress);
+                mTextInputEditText.setText(String.format(getString(R.string.menuInput),mDeviceName,mBtAddress));
                 mConnectButton.setEnabled(true);
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "Oops! Something went wrong...", Toast.LENGTH_SHORT).show();

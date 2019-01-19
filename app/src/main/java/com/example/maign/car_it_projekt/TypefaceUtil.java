@@ -2,11 +2,10 @@ package com.example.maign.car_it_projekt;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.util.Log;
 
 import java.lang.reflect.Field;
 
-public class TypefaceUtil {
+ class TypefaceUtil {
 
     /**
      * Using reflection to override default typeface
@@ -15,7 +14,7 @@ public class TypefaceUtil {
      * @param defaultFontNameToOverride for example "monospace"
      * @param customFontFileNameInAssets file name of the font from assets
      */
-    public static void overrideFont(Context context, String defaultFontNameToOverride, String customFontFileNameInAssets) {
+     static void overrideFont(Context context, String defaultFontNameToOverride, String customFontFileNameInAssets) {
         try {
             final Typeface customFontTypeface = Typeface.createFromAsset(context.getAssets(), customFontFileNameInAssets);
 
