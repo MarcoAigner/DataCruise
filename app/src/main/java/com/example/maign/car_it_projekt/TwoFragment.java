@@ -17,6 +17,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 
+
 public class TwoFragment extends Fragment {
 
     //Layout Elements
@@ -109,7 +110,12 @@ public class TwoFragment extends Fragment {
         double doubleRpm = Double.parseDouble(rpm.substring(1));
         doubleRpm *= 100;
         NumberFormat formatter = new DecimalFormat("#0.0");
+
         mTextRpm.setText(String.format(getString(R.string.rpmContent),formatter.format(doubleRpm)));
+
+    }
+
+    
     }
 
     void resetSportValues() {
