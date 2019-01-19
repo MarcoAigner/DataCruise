@@ -2,7 +2,7 @@ package com.example.maign.car_it_projekt;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -28,39 +27,19 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import static java.lang.Math.round;
 
-
-//import info.androidhive.materialtabs.R;
 
 
 public class OneFragment extends Fragment {
 
 
-    private int mCurrentSpeed;
+
 
     //Layout Elements
     private View mThisFragmentView;
-    private AppCompatActivity mThisAppCompat;
     private TextInputEditText mTextRuntime;
     private TextInputEditText mTextPedal;
-    private TextInputEditText mTextRemaining;
-
-
-    //Variables for Bluetooth
-    private BTManager mBTManager;
-    private BTMsgHandler mBTHandler; // Our main handler that will receive callback notifications
-    private String mBluetoothAddress;
-    private boolean mIsConnected;
-    private boolean mCouldGetAdress;
-    private boolean mCouldSetUpManager;
-
-    //Other Variables
-    private String mShortenedString = "";
-    private String mCurrentMsg;
-    private View.OnClickListener mBtStartButtonListener;
-
-
+    private TextInputEditText mTextOutside;
 
 
     //Speedometer
@@ -69,10 +48,6 @@ public class OneFragment extends Fragment {
     //Shift
     private ImageView mShiftImage;
 
-
-
-    //Interface to communicate
-    private EcoFragmentReceiver ecoFragmentReceiver;
 
     //Counter on how long rpm is too high
     private int mRpmCounter;
@@ -93,7 +68,7 @@ public class OneFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
@@ -109,10 +84,6 @@ public class OneFragment extends Fragment {
         return mThisFragmentView;
     }
 
-    public void testUpdateElements(int testValA, int testValB) {
-        mTextRuntime.setText(String.valueOf(testValA));
-        mTextPedal.setText(String.valueOf(testValB));
-    }
 
     /**
      * Setting up all the elements.
@@ -126,7 +97,7 @@ public class OneFragment extends Fragment {
 
         mTextRuntime = mThisFragmentView.findViewById(R.id.runtime);
         mTextPedal = mThisFragmentView.findViewById(R.id.text_pedal);
-        mTextRemaining = mThisFragmentView.findViewById(R.id.text_remaining);
+        mTextOutside = mThisFragmentView.findViewById(R.id.text_remaining);
         mShiftImage = mThisFragmentView.findViewById(R.id.image_shift);
         mSpeedometerEco = mThisFragmentView.findViewById(R.id.speedometer_eco);
 
@@ -136,49 +107,6 @@ public class OneFragment extends Fragment {
     }
 
 
-    /**
-     * OnClickListener Method for the start button.
-     * OnClick, a connection to the selected bt device is established
-     *
-     * @return
-     */
-    private View.OnClickListener createStartButtonListener() {
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    if (mBTManager != null) {
-                        //if (mCouldGetAdress == true) {
-                        if (mIsConnected == false) {
-                            //mBTManager.connect(mTestBTConnectionArduinoAdrdress);
-
-                            mIsConnected = true;
-                            //handleValues("A323B456C458D785E457F587G845H554I5418");
-                            //sendStringToThinkspeak("5678");
-                            mSpeedometerEco.speedTo(Float.parseFloat("30"));
-
-
-                        } else {
-                            mBTManager.cancel();
-                            //Toast.makeText(Eco_Activity.this, "Disconnected", Toast.LENGTH_SHORT).show();
-                            resetValues();
-
-                            mIsConnected = false;
-                        }
-                        /*} else {
-                            Toast.makeText(mThisFragmentView.getContext(), "No Bluetooth Address found", Toast.LENGTH_LONG);
-                        }*/
-                    } else {
-                        Toast.makeText(mThisFragmentView.getContext(), "Bluetooth Manager Null Exception", Toast.LENGTH_LONG);
-                    }
-                    Log.d("Eco Activity", "On Click setup");
-                } catch (Exception e) {
-                    Toast.makeText(mThisFragmentView.getContext(), e.getMessage(), Toast.LENGTH_LONG);
-                }
-            }
-        };
-        return listener;
-    }
 
 
     /**
@@ -196,23 +124,16 @@ public class OneFragment extends Fragment {
     }
 
 
-    /**
-     * As the creation of an error toast has shown to be redundant, a simple method has been written
-     * for this purpose
-     *
-     * @param e
-     */
+
     private void showErrorToast(Exception e) {
         Toast.makeText(mThisFragmentView.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
     }
 
-    public void handleRpm(String rpmValue, double currentSpeed) {
+     void handleRpm(String rpmValue, double currentSpeed) {
         try {
-            //mShortenedString = rpmValue.substring(1);
             Log.d("OneFrag RPM Value:", rpmValue);
             float currentRoundsPerMinute = Float.parseFloat(rpmValue.substring(1));
-            Log.d("Eco Activity", "Reached starts with A, Drehzahl: " + currentRoundsPerMinute);
-            giveShiftReccomendation(Math.round(currentRoundsPerMinute),currentSpeed);
+            giveShiftRecommendation(Math.round(currentRoundsPerMinute),currentSpeed);
             mSpeedometerEco.speedTo(currentRoundsPerMinute);
 
         } catch (Exception e) {
@@ -222,47 +143,38 @@ public class OneFragment extends Fragment {
 
     }
 
-    public void handleRuntime(String runtimeValue) {
+    void handleRuntime(String runtimeValue) {
         try {
-            mShortenedString = runtimeValue.substring(1);
-            double runtime = Float.parseFloat(mShortenedString);
+            double runtime = Float.parseFloat(runtimeValue.substring(1));
             runtime /= 60;
             NumberFormat formatter = new DecimalFormat("#0.0");
-            mTextRuntime.setText(formatter.format(runtime) + "\nminutes");
+            mTextRuntime.setText(String.format(getString(R.string.runtimeContent), formatter.format(runtime)));
         } catch (Exception e) {
             Log.d("OneFrag Handle Runtime", e.toString());
         }
     }
 
-    public void handlePedalPosition(String pedalValue) {
+     void handlePedalPosition(String pedalValue) {
         try {
-            mShortenedString = pedalValue.substring(1);
-            //int pedalPosition = Integer.parseInt(mShortenedString);
-            mTextPedal.setText(mShortenedString + " %");
+            mTextPedal.setText(String.format(getString(R.string.pedalContent),pedalValue.substring(1)));
         } catch (Exception e) {
             showErrorToast(e);
         }
     }
 
-    public void handleOutsideTemp(String temp) {
-        mShortenedString = temp.substring(1);
-        Log.d("Remaining fuel", mShortenedString);
+     void handleOutsideTemp(String temp) {
         double currentTemp = Double.parseDouble(temp.substring(1));
         currentTemp /= 10;
-        mTextRemaining.setText(currentTemp + " °C");
+         mTextOutside.setText(String.format(getString(R.string.outsideContent),currentTemp));
+
     }
 
-
-    private void resetValues() {
-        //
-        mSpeedometerEco.speedTo((float) 0.0);
-    }
 
 
     /**
      * Depending on the current rpm, the app suggests to shift up or downwards
      */
-    private void giveShiftReccomendation(int rpm, double speed) {
+    private void giveShiftRecommendation(int rpm, double speed) {
         if (rpm > 30) {
             mShiftImage.setImageResource(R.drawable.shift_up);
             mRpmCounter++;
@@ -282,7 +194,7 @@ public class OneFragment extends Fragment {
                    }
                }
            }catch (Exception e){
-
+               Log.e("OneFrag Shift", "Error occurred", e);
            }
         } else {
             mShiftImage.setImageResource(R.drawable.shift_ok);
@@ -290,7 +202,7 @@ public class OneFragment extends Fragment {
         }
     }
 
-    public void sendToThinkSpeak(int value) {
+    private void sendToThinkSpeak(int value) {
 // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(mThisFragmentView.getContext());
         String url = "https://api.thingspeak.com/update?api_key=YLGI2F4QF01D4HHJ&field1=" + value;
@@ -314,11 +226,11 @@ public class OneFragment extends Fragment {
         queue.add(stringRequest);
     }
 
-    public void resetEcoValues(){
+     void resetEcoValues(){
         mSpeedometerEco.speedTo((float) 0.0);
         mTextRuntime.setText("");
         mTextPedal.setText("");
-        mTextRemaining.setText("");
+        mTextOutside.setText("");
     }
 
 

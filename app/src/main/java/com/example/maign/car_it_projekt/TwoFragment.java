@@ -1,10 +1,9 @@
 package com.example.maign.car_it_projekt;
 
-import android.graphics.Color;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
+
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -17,42 +16,23 @@ import com.github.anastr.speedviewlib.ProgressiveGauge;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-//import info.androidhive.materialtabs.R;
-
 
 public class TwoFragment extends Fragment {
 
     //Layout Elements
     private View mThisFragmentView;
-    private TextView mTextRpmSport;
     private TextView mTextVMax;
     private TextView mTextRpm;
     private TextView mTextEngineLoad;
     private TextView mTextTemperature;
 
 
-    //Variables for Bluetooth
-    private BTManager mBTManager;
-    private BTMsgHandler mBTHandler; // Our main handler that will receive callback notifications
-    private String mBluetoothAddress;
-    private boolean mIsConnected;
-    private boolean mCouldGetAdress;
-    private boolean mCouldSetUpManager;
-
-    private SensorManager mSensorManager;
-    private Sensor mSensor;
-
-    //Other Variables
-    private String mshortenedString = "";
-    private String mCurrentMsg;
     private float vMax;
 
 
     //Speed Meter
-    ProgressiveGauge mSpeedoMeterSport;
+    private ProgressiveGauge mSpeedMeterSport;
 
-    //Interface to communicate
-    private SportFragmentReceiver sportFragmentReceiver;
 
     public interface SportFragmentReceiver {
         void onSportSent(String input);
@@ -69,7 +49,7 @@ public class TwoFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mThisFragmentView = inflater.inflate(R.layout.fragment_two, container, false);
@@ -82,21 +62,9 @@ public class TwoFragment extends Fragment {
         configureSpeedMeter();
 
 
-
         return mThisFragmentView;
     }
 
-   /* @Override
-    public void onPause(){
-        super.onPause();
-        mBTManager.cancel();
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-        mBTManager.connect(mBluetoothAddress);
-    }*/
 
     private void setupElements() {
 
@@ -105,64 +73,52 @@ public class TwoFragment extends Fragment {
         mTextRpm = mThisFragmentView.findViewById(R.id.text_rpm);
         mTextEngineLoad = mThisFragmentView.findViewById(R.id.text_engine_load);
         mTextTemperature = mThisFragmentView.findViewById(R.id.text_temperature);
-        mIsConnected = false;
-        mCouldGetAdress = false;
-        mCouldSetUpManager = false;
-        mSpeedoMeterSport = mThisFragmentView.findViewById(R.id.speedometer_sport);
+        mSpeedMeterSport = mThisFragmentView.findViewById(R.id.speedometer_sport);
 
         vMax = 0;
 
     }
 
     private void configureSpeedMeter() {
-        mSpeedoMeterSport.setMinMaxSpeed((float) 0.0, (float) 250.0);
-        mSpeedoMeterSport.setUnitUnderSpeedText(false);
-        mSpeedoMeterSport.setSpeedTextSize((float) 100.0);
-        mSpeedoMeterSport.setUnitTextSize((float) 100.0);
-
+        mSpeedMeterSport.setMinMaxSpeed((float) 0.0, (float) 250.0);
+        mSpeedMeterSport.setUnitUnderSpeedText(false);
+        mSpeedMeterSport.setSpeedTextSize((float) 100.0);
+        mSpeedMeterSport.setUnitTextSize((float) 100.0);
 
 
     }
 
-    public void handleSpeed(String speed){
+    void handleSpeed(String speed) {
         float speedFloat = Float.parseFloat(speed.substring(1));
-        if(speedFloat > vMax){
+        if (speedFloat > vMax) {
             vMax = speedFloat;
         }
-        mTextVMax.setText(vMax+" km/h");
-        mSpeedoMeterSport.speedTo(speedFloat);
+        mTextVMax.setText(String.format(getString(R.string.vMaxContent),speedFloat));
+        mSpeedMeterSport.speedTo(speedFloat);
     }
 
-    public void handleEngineLoad(String engineLoad){
-        mTextEngineLoad.setText(engineLoad.substring(1)+" %");
+    void handleEngineLoad(String engineLoad) {
+        mTextEngineLoad.setText(String.format(getString(R.string.loadContent),engineLoad.substring(1)));
     }
 
-    public void handleTemperature(String temperature) {
-        mTextTemperature.setText(temperature.substring(1) + " °C");
+    void handleTemperature(String temperature) {
+        mTextTemperature.setText(String.format(getString(R.string.temperatureContent),temperature.substring(1)));
     }
-    public void handleRpm(String rpm){
+
+    void handleRpm(String rpm) {
         double doubleRpm = Double.parseDouble(rpm.substring(1));
         doubleRpm *= 100;
         NumberFormat formatter = new DecimalFormat("#0.0");
-        mTextRpm.setText(formatter.format(doubleRpm) +" rpm");
+        mTextRpm.setText(String.format(getString(R.string.rpmContent),formatter.format(doubleRpm)));
     }
 
-    public void resetSportValues(){
-        mSpeedoMeterSport.speedTo((float)0.0);
+    void resetSportValues() {
+        mSpeedMeterSport.speedTo((float) 0.0);
         mTextRpm.setText("");
         mTextEngineLoad.setText("");
         mTextTemperature.setText("");
         vMax = 0;
     }
-
-
-
-
-
-
-
-
-
 
 
 }

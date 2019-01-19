@@ -1,8 +1,23 @@
 <resources>
     <string name="app_name">Data Cruise</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="OneFragment">Fragment One</string>
+
+    <string name="menuInput">%1s\n%2s</string>
+
+    <string name="runtimeContent">%1s\nminutes</string>
+    <string name="pedalContent">%1s &#37;</string>
+    <string name="outsideContent">%1d °C</string>
+    
+    <string name="vMaxContent">%1f km/h</string>
+    <string name="loadContent">%1s &#37;</string>
+    <string name="temperatureContent">%1s °C</string>
+    <string name="rpmContent">%1s rpm</string>
+
+
+
+
     <string name="TwoFragment">Fragment Two</string>
 
     <string name="switchHC">"HC-" only</string>
@@ -10,7 +25,7 @@
     <string name="contentDescriptionLogo">App Logo</string>
     <string name="connect">Connect</string>
     <string name="currentDevice">Current device</string>
-    <string name="selectDevice">Please select an arduino device to connect</string>
+    <string name="selectDevice">Please select an Arduino device to connect</string>
 
     <string name="runtimeString">Runtime</string>
     <string name="pedalString">Pedal Position</string>
@@ -26,8 +41,7 @@
     <string name="welcomeDiagTitle">Welcome!</string>
     <string name="welcomeDiagMsg">In order to maximize the time you will be able to enjoy using our app, please agree to not control your phone while driving\n\nHanno, Dennis, Laslo and Marco</string>
     <string name="welcomeButtonAccept">Will do so!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 
 </resources>
