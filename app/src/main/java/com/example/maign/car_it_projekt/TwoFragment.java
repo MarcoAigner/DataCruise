@@ -17,7 +17,6 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 
-
 public class TwoFragment extends Fragment {
 
     //Layout Elements
@@ -67,6 +66,7 @@ public class TwoFragment extends Fragment {
     }
 
 
+    //Initialized elements
     private void setupElements() {
 
         //mTextRpmSport = findViewById(R.id.text_rpm_sport);
@@ -80,6 +80,7 @@ public class TwoFragment extends Fragment {
 
     }
 
+    //Configures the speedmeter
     private void configureSpeedMeter() {
         mSpeedMeterSport.setMinMaxSpeed((float) 0.0, (float) 250.0);
         mSpeedMeterSport.setUnitUnderSpeedText(false);
@@ -89,35 +90,37 @@ public class TwoFragment extends Fragment {
 
     }
 
+    //takes the current speed and sets the speedmeter to this speed
     void handleSpeed(String speed) {
         float speedFloat = Float.parseFloat(speed.substring(1));
         if (speedFloat > vMax) {
             vMax = speedFloat;
         }
-        mTextVMax.setText(String.format(getString(R.string.vMaxContent),speedFloat));
+        mTextVMax.setText(String.format(getString(R.string.vMaxContent), speedFloat));
         mSpeedMeterSport.speedTo(speedFloat);
     }
 
+    //takes the engine load and formats it to the fitting textView
     void handleEngineLoad(String engineLoad) {
-        mTextEngineLoad.setText(String.format(getString(R.string.loadContent),engineLoad.substring(1)));
+        mTextEngineLoad.setText(String.format(getString(R.string.loadContent), engineLoad.substring(1)));
     }
 
+    //takes the temperature load and formats it to the fitting textView
     void handleTemperature(String temperature) {
-        mTextTemperature.setText(String.format(getString(R.string.temperatureContent),temperature.substring(1)));
+        mTextTemperature.setText(String.format(getString(R.string.temperatureContent), temperature.substring(1)));
     }
 
+    //takes the rpm load and formats it to the fitting textView
     void handleRpm(String rpm) {
         double doubleRpm = Double.parseDouble(rpm.substring(1));
         doubleRpm *= 100;
         NumberFormat formatter = new DecimalFormat("#0.0");
 
-        mTextRpm.setText(String.format(getString(R.string.rpmContent),formatter.format(doubleRpm)));
+        mTextRpm.setText(String.format(getString(R.string.rpmContent), formatter.format(doubleRpm)));
 
     }
 
-    
-    }
-
+    //sets all values back to default
     void resetSportValues() {
         mSpeedMeterSport.speedTo((float) 0.0);
         mTextRpm.setText("");

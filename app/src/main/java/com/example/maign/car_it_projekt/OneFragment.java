@@ -28,11 +28,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 
-
-
 public class OneFragment extends Fragment {
-
-
 
 
     //Layout Elements
@@ -85,13 +81,9 @@ public class OneFragment extends Fragment {
     }
 
 
-    /**
+    /*
      * Setting up all the elements.
      * Linking the xml elements to their java counterparts.
-     * <p>
-     * <p>
-     * DELETE LATER
-     * Setting an icon and a listener to the mock start button
      */
     private void setupElements() {
 
@@ -107,9 +99,7 @@ public class OneFragment extends Fragment {
     }
 
 
-
-
-    /**
+    /*
      * Method to set up the speedometer as wished
      */
     private void configureSpeedMeter() {
@@ -124,16 +114,12 @@ public class OneFragment extends Fragment {
     }
 
 
-
-    private void showErrorToast(Exception e) {
-        Toast.makeText(mThisFragmentView.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-    }
-
-     void handleRpm(String rpmValue, double currentSpeed) {
+    //takes the current rpm and sets the speedmeter accordingly
+    void handleRpm(String rpmValue, double currentSpeed) {
         try {
             Log.d("OneFrag RPM Value:", rpmValue);
             float currentRoundsPerMinute = Float.parseFloat(rpmValue.substring(1));
-            giveShiftRecommendation(Math.round(currentRoundsPerMinute),currentSpeed);
+            giveShiftRecommendation(Math.round(currentRoundsPerMinute), currentSpeed);
             mSpeedometerEco.speedTo(currentRoundsPerMinute);
 
         } catch (Exception e) {
@@ -143,6 +129,7 @@ public class OneFragment extends Fragment {
 
     }
 
+    //Takes the current runtime and formats it into it's fitting textView
     void handleRuntime(String runtimeValue) {
         try {
             double runtime = Float.parseFloat(runtimeValue.substring(1));
@@ -154,54 +141,57 @@ public class OneFragment extends Fragment {
         }
     }
 
-     void handlePedalPosition(String pedalValue) {
+    //Takes the current pedalPosition and formats it into it's fitting textView
+    void handlePedalPosition(String pedalValue) {
         try {
-            mTextPedal.setText(String.format(getString(R.string.pedalContent),pedalValue.substring(1)));
+            mTextPedal.setText(String.format(getString(R.string.pedalContent), pedalValue.substring(1)));
         } catch (Exception e) {
-            showErrorToast(e);
+
+            Log.d("OneFrag handlePedal", e.toString());
         }
     }
 
-     void handleOutsideTemp(String temp) {
+    //Takes the current temperature and formats it into it's fitting textView
+    void handleOutsideTemp(String temp) {
         double currentTemp = Double.parseDouble(temp.substring(1));
         currentTemp /= 10;
-         mTextOutside.setText(String.format(getString(R.string.outsideContent),currentTemp));
+        mTextOutside.setText(String.format(getString(R.string.outsideContent), currentTemp));
 
     }
 
 
-
-    /**
+    /*
      * Depending on the current rpm, the app suggests to shift up or downwards
      */
     private void giveShiftRecommendation(int rpm, double speed) {
         if (rpm > 30) {
             mShiftImage.setImageResource(R.drawable.shift_up);
             mRpmCounter++;
-            if(mRpmCounter > 8){
+            if (mRpmCounter > 8) {
                 sendToThinkSpeak(1);
                 mRpmCounter = 0;
             }
         } else if (rpm < 15) {
-           try{
-               if(speed <= 10){
-                  mShiftImage.setImageResource(R.drawable.shift_ok);
-               }else{
-                   mShiftImage.setImageResource(R.drawable.shift_down);
-                   if(mRpmCounter > 8){
-                       sendToThinkSpeak(0);
-                       mRpmCounter = 0;
-                   }
-               }
-           }catch (Exception e){
-               Log.e("OneFrag Shift", "Error occurred", e);
-           }
+            try {
+                if (speed <= 10) {
+                    mShiftImage.setImageResource(R.drawable.shift_ok);
+                } else {
+                    mShiftImage.setImageResource(R.drawable.shift_down);
+                    if (mRpmCounter > 8) {
+                        sendToThinkSpeak(0);
+                        mRpmCounter = 0;
+                    }
+                }
+            } catch (Exception e) {
+                Log.e("OneFrag Shift", "Error occurred", e);
+            }
         } else {
             mShiftImage.setImageResource(R.drawable.shift_ok);
             mRpmCounter = 0;
         }
     }
 
+    //Takes an integer as an argument which is then sent to the connected thingspeak server
     private void sendToThinkSpeak(int value) {
 // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(mThisFragmentView.getContext());
@@ -213,12 +203,12 @@ public class OneFragment extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
-                        Snackbar.make(mThisFragmentView,"Response from server: "+response,Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(mThisFragmentView, "Response from server: " + response, Snackbar.LENGTH_SHORT).show();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Snackbar.make(mThisFragmentView,"Error from server: "+error,Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(mThisFragmentView, "Error from server: " + error, Snackbar.LENGTH_SHORT).show();
             }
         });
 
@@ -226,15 +216,13 @@ public class OneFragment extends Fragment {
         queue.add(stringRequest);
     }
 
-     void resetEcoValues(){
+    //sets all values back to default
+    void resetEcoValues() {
         mSpeedometerEco.speedTo((float) 0.0);
         mTextRuntime.setText("");
         mTextPedal.setText("");
         mTextOutside.setText("");
     }
-
-
-
 
 
 }

@@ -2,15 +2,11 @@ package com.example.maign.car_it_projekt;
 
 
 import android.os.Bundle;
-
 import android.util.Log;
-
 import android.view.View;
-
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
-
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -87,17 +83,21 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
 
     }
 
+    //Handle State: On Stop the Connection is canceled
+    //Reset values if so
     @Override
     protected void onStop() {
         super.onStop();
         try {
             mBTManager.cancel();
         } catch (Exception e) {
-            showErrorSnackbar("On Stoö error " + e);
+            showErrorSnackbar("On Stop error " + e);
         }
         resetValuesOnDisconnect();
     }
 
+    //Handle State: On Pause the Connection is canceled
+    //Reset values if so
     @Override
     protected void onPause() {
         super.onPause();
@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         resetValuesOnDisconnect();
     }
 
+    //Handle State: On Restart the Connection is re-enabled
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -119,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         }
     }
 
+    //Handle State: On Resume the Connection is re-enabled
     @Override
     protected void onResume() {
         super.onResume();
@@ -131,19 +133,18 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     }
 
 
-
+    //Sets Icons for both tabs
     private void setupTabIcons() {
         try {
-            if(tabIcons != null && tabLayout != null){
-                tabLayout.getTabAt(0).setIcon(tabIcons[0]);
-                tabLayout.getTabAt(1).setIcon(tabIcons[1]);
-            }
+            tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+            tabLayout.getTabAt(1).setIcon(tabIcons[1]);
         } catch (NullPointerException e) {
             showErrorSnackbar("Couldn't setup TabIcons " + e);
         }
     }
 
 
+    // Sets up a view pager for the tab layout
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(oneFrag, "ECO ");
@@ -151,11 +152,8 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         viewPager.setAdapter(adapter);
     }
 
-    /**
-     * Extract the bluetooth address attached to the intent from menu activity
-     * and save it into the variable mBluetoothAddress
-     */
 
+    //gets the bluetooth address out of the intent from the menu activity
     private void getBluetoothAddress() {
         Bundle extras = getIntent().getExtras();
         try {
@@ -171,11 +169,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
 
     }
 
-    /**
-     * Setting up the elements.
-     * Linking java objects to their xml counterparts.
-     * setting viewpager
-     */
+    //summarized all initializations
     private void setupElements() {
         //Layout Elements
         mParentView = findViewById(R.id.Coordinator_Main);
@@ -200,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
 
     }
 
-
+    //as a snackbar is showed multiple times, this method has been written so save loc
     private void showErrorSnackbar(String e) {
         Snackbar.make(mParentView, "An error occured: " + e, Snackbar.LENGTH_LONG).show();
     }
@@ -255,11 +249,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     }
 
 
-    /**
-     * Adapter class to handle the two fragments inside the tab layout
-     * The inherited method are rather self explaining.
-     * Because of that this class is not further commented
-     */
+    //Adapter Class to handle both fragments
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -291,11 +281,11 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     }
 
 
-    /**
-     * Message handler to handle incoming values
-     */
+    //Message handler from BTMsgHandler Class
     private void createMsgHandler() {
         mBTHandler = new BTMsgHandler() {
+            //Here happens the magic
+            //Input as string is passed to onEco and onSport sent
             @Override
             void receiveMessage(String msg) {
                 Log.d("Received value:", msg);
@@ -304,12 +294,8 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
 
             }
 
-            /**
-             * Setzt einen Text in das entsprechende Feld um den Benutzer Ã¼ber den Status
-             * der Verbindung zu informieren.
-             * @param isConnected
-             */
 
+            //shows Snackbar informing about connection
             @Override
             void receiveConnectStatus(boolean isConnected) {
 
@@ -321,10 +307,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
             }
 
 
-            /**
-             * Falls Fehler auftritt, zeige ihn dem Nutzer
-             * @param e
-             */
+            //Shows error in case of one
             @Override
             void handleException(Exception e) {
                 showErrorSnackbar(e.toString());
@@ -332,9 +315,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         };
     }
 
-    /**
-     * Creation of a bluetooth manager
-     */
+    //Creation of bluetooth manager
     private void createBtManager() {
         try {
             mBTManager = new BTManager(this, mBTHandler);
@@ -345,11 +326,12 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         }
     }
 
-
+    //initialize connection on activity startup
     private void initializeConnection() {
         mBTManager.connect(mBluetoothAddress);
     }
 
+    //resets values if connection is cancelled
     private void resetValuesOnDisconnect() {
         oneFrag.resetEcoValues();
         twoFrag.resetSportValues();
