@@ -1,4 +1,4 @@
-#Thu Jan 17 08:54:48 CET 2019
-base.0=C\:\\src\\HNU\\DataCruise\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+#Mon Jan 21 15:15:23 CET 2019
+base.0=C\:\\src\\HNU\\umbenennmich\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex

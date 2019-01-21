@@ -22,9 +22,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/MyMaterialTheme" >
-        <activity android:name="com.example.maign.car_it_projekt.MainActivity" />
-        <activity android:name="com.example.maign.car_it_projekt.MenuActivity" >
+        android:theme="@style/AppTheme.Launcher" >
+        <activity
+            android:name="com.example.maign.car_it_projekt.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.maign.car_it_projekt.MenuActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

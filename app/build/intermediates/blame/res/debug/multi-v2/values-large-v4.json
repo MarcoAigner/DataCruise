@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\src\\HNU\\DataCruise\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-large-v4\\values-large-v4.xml",
+            "outputFile": "C:\\src\\HNU\\umbenennmich\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-large-v4\\values-large-v4.xml",
             "map": [
                 {
                     "source": "C:\\Users\\MAign\\.gradle\\caches\\transforms-1\\files-1.1\\material-1.1.0-alpha02.aar\\5133c8ee42e0f90c9f84426c4cb2c385\\res\\values-large-v4\\values-large-v4.xml",
