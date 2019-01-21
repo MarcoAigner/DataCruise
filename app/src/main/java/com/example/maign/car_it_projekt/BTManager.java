@@ -6,8 +6,6 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.SystemClock;
-import android.util.Log;
-import android.widget.Toast;
 
 
 import java.io.IOException;
@@ -19,9 +17,8 @@ import java.util.UUID;
 
 public class BTManager {
 
-    private BluetoothAdapter mBTAdapter;
+    private BluetoothAdapter mBTAdapter = null;
     private Set<BluetoothDevice> mPairedDevices;
-
 
     private BTMsgHandler mHandler; // Our main handler that will receive callback notifications
     private ConnectedThread mConnectedThread; // bluetooth background worker thread to send and receive data
@@ -31,43 +28,37 @@ public class BTManager {
 
     // #defines for identifying shared types between calling functions
     public final static int REQUEST_ENABLE_BT = 1; // used to identify adding bluetooth names
-    final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
-    final static int CONNECTING_STATUS = 3; // used in bluetooth handler to identify message status
+    public final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
+    public final static int CONNECTING_STATUS = 3; // used in bluetooth handler to identify message status
 
 
-    BTManager(Activity act, BTMsgHandler handler) throws Exception {
+    /**
+     * Constructor
+     *
+     * @param act
+     * @param handler
+     * @throws Exception
+     */
+    public BTManager(Activity act, BTMsgHandler handler) throws Exception {
         mHandler = handler;
 
         mBTAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBTAdapter == null) {
             throw new Exception("Adapter not enabled");
         } else {
-            if (!mBTAdapter.isEnabled()) {
+            if (mBTAdapter.isEnabled()) {
+            } else {
                 //Ask to the user turn the bluetooth on
                 Intent turnBTon = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 act.startActivityForResult(turnBTon, 1);
             }
         }
-    }
-
-    BTManager(Activity act) throws Exception {
-        mBTAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (mBTAdapter == null) {
-            throw new Exception("Adapter not enabled");
-        } else {
-            if (!mBTAdapter.isEnabled()) {
-                //Ask to the user turn the bluetooth on
-                Intent turnBTon = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                act.startActivityForResult(turnBTon, 1);
-            }
-        }
-
     }
 
     /**
      * Get a list of names and MAC-Addresses of all paired devices
      */
-    ArrayList<String> getPairedDeviceInfos() {
+    public ArrayList<String> getPairedDeviceInfos() {
         ArrayList list = new ArrayList();
 
         Set<BluetoothDevice> pairedDevices = mBTAdapter.getBondedDevices();
@@ -90,13 +81,17 @@ public class BTManager {
     /**
      * close the communication thread
      */
-    void cancel() {
+    public void cancel() {
         if (mConnectedThread != null) {
             mConnectedThread.cancel();
         }
     }
 
-
+    /**
+     * connect to device for given address
+     *
+     * @param address
+     */
     public void connect(final String address) {
 
         new Thread() {
@@ -125,7 +120,7 @@ public class BTManager {
                     }
                 }
 
-                if (!fail) {
+                if (fail == false) {
                     mConnectedThread = new ConnectedThread(mBTSocket);
                     mConnectedThread.start();
 
@@ -150,7 +145,7 @@ public class BTManager {
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;
 
-        ConnectedThread(BluetoothSocket socket) {
+        public ConnectedThread(BluetoothSocket socket) {
             mmSocket = socket;
             InputStream tmpIn = null;
             OutputStream tmpOut = null;
@@ -161,7 +156,6 @@ public class BTManager {
                 tmpIn = socket.getInputStream();
                 tmpOut = socket.getOutputStream();
             } catch (IOException e) {
-                Log.e("BTManager", e.toString());
             }
 
             mmInStream = tmpIn;
@@ -207,25 +201,21 @@ public class BTManager {
         }
 
         /* Call this from the main activity to send data to the remote device */
-        void write(String input) {
+        public void write(String input) {
             byte[] bytes = input.getBytes();           //converts entered String into bytes
             try {
                 mmOutStream.write(bytes);
             } catch (IOException e) {
-                Log.e("BTManager", e.toString());
             }
         }
 
         /* Call this from the main activity to shutdown the connection */
-        void cancel() {
+        public void cancel() {
             try {
                 mmSocket.close();
             } catch (IOException e) {
-                Log.e("BTManager", e.toString());
             }
         }
-
-
     }
 
 

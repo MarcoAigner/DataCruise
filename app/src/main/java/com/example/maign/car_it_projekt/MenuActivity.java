@@ -3,7 +3,6 @@ package com.example.maign.car_it_projekt;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
@@ -20,11 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
@@ -37,10 +37,16 @@ public class MenuActivity extends AppCompatActivity {
     private MaterialButton mConnectButton;
 
 
+    //Listener variables
+    private View.OnClickListener mSwitchToTabsListener;
+    private CompoundButton.OnCheckedChangeListener mSwitchOnChangeListener;
+
     //Bluetooth related variables
     private BTManager mBTManager;
+    private BTMsgHandler mBTHandler;
     private BluetoothAdapter bluetoothAdapter;
     private String mBtAddress;
+    private String mDeviceName;
 
 
     private ArrayAdapter mAdapter;
@@ -57,7 +63,7 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menue);
 
         //Create a Bluetooth Manager
-        createBtManager(this);
+        createBtManager(this, mBTHandler);
 
         //Setup all Layout elements
         setupElements();
@@ -66,12 +72,12 @@ public class MenuActivity extends AppCompatActivity {
         showWelcomeDialog();
 
         //Get lists of connected devices
-        createPairedDevicesLists();
+        pairedDevicesLists();
 
 
     }
 
-    /*
+    /**
      * Setting up all the elements.
      * Linking xml elements to their java counterparts
      * Setting connect button to not be enabled on startup
@@ -98,14 +104,15 @@ public class MenuActivity extends AppCompatActivity {
         mSwitch.setOnCheckedChangeListener(setSwitchOnChangeListener());
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        mBtAddress = "";
 
 
     }
 
 
-    //Shows a welcome dialog on Activity start
-    @SuppressLint("InflateParams")
+    /**
+     * Show a welcome dialog which in a funny way encourages the user to not risk
+     * his or her life and so not control the phone while driving
+     */
     private void showWelcomeDialog() {
         AlertDialog.Builder welcomeAlert = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -120,19 +127,19 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    /*
+    /**
      * Method creating a bluetooth manager instance
      */
-    private void createBtManager(Activity activity) {
+    private void createBtManager(Activity activity, BTMsgHandler handler) {
         try {
-            mBTManager = new BTManager(activity);
+            mBTManager = new BTManager(activity, handler);
             Log.d("Menu Activity", "Manager created");
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
-    //return an onclicklistener for the welcome dielog that checks if bluetooth has been enabled
+
     private DialogInterface.OnClickListener createAcceptWelcomeListener() {
         return new DialogInterface.OnClickListener() {
             @Override
@@ -152,12 +159,12 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    /*
+    /**
      * Method to get two lists of paired bluetooth devices
      * The first includes all paired devices
      * The second only includes ones which start with 'HC' to increase comfort
      */
-    private void createPairedDevicesLists() {
+    private void pairedDevicesLists() {
 
         if (!bluetoothAdapter.isEnabled()) {
             Toast.makeText(this, "Bluetooth is currently off!", Toast.LENGTH_LONG).show();
@@ -190,9 +197,7 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
-    /*
-    Method that searches an arrayList for entries that start with "HC" and saves them in another
-     */
+
     private void extractArduinoDevices(ArrayList<String> extractFromList, ArrayList<String> extractIntoList) {
         for (String string : extractFromList) {
 
@@ -208,7 +213,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    /*
+    /**
      * Method that returns the onClick behaviour for the reload button
      * In this case, pairedDevices() is rerun
      *
@@ -218,15 +223,14 @@ public class MenuActivity extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createPairedDevicesLists();
+                pairedDevicesLists();
             }
         };
     }
 
 
-    //Listener that switches to the mainActivity and passes it the Bt address
     private View.OnClickListener setSwitchToTabsListener() {
-        return new View.OnClickListener() {
+        mSwitchToTabsListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -234,15 +238,13 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         };
+
+        return mSwitchToTabsListener;
     }
 
 
-    /*
-        Fills the list view either with all devices of just hc devices
-        based on the state of the switch
-     */
     private CompoundButton.OnCheckedChangeListener setSwitchOnChangeListener() {
-        return new CompoundButton.OnCheckedChangeListener() {
+        mSwitchOnChangeListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -257,10 +259,12 @@ public class MenuActivity extends AppCompatActivity {
                 }
             }
         };
+
+        return mSwitchOnChangeListener;
     }
 
 
-    /*
+    /**
      * Method that returns an OnItemClick Listener for the ListView
      * If an Item is selected, the bluetooth address and device name get stored into global variables
      * The user gets informed about them in a seperate text view
@@ -271,15 +275,15 @@ public class MenuActivity extends AppCompatActivity {
             // Get the device MAC address, the last 17 chars in the View
             String info = ((TextView) v).getText().toString();
             //final String address = info.substring(info.length() - 17);
-            String mBtAddress = info.substring(info.length() - 17);
-            String mDeviceName = info.substring(0, info.length() - 17);
+            mBtAddress = info.substring(info.length() - 17);
+            mDeviceName = info.substring(0, info.length() - 17);
 
-            Log.d("Menu Activity:", "Bt Address:" + mBtAddress);
-            Log.d("Menu Activity:", "Device Name:" + mDeviceName);
+            Log.d("Menue Activity:", "Bt Address:" + mBtAddress);
+            Log.d("Menue Activity:", "Device Name:" + mDeviceName);
 
 
             try {
-                mTextInputEditText.setText(String.format(getString(R.string.menuInput), mDeviceName, mBtAddress));
+                mTextInputEditText.setText(String.format(getString(R.string.menuInput),mDeviceName,mBtAddress));
                 mConnectButton.setEnabled(true);
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "Oops! Something went wrong...", Toast.LENGTH_SHORT).show();
