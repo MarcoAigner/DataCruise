@@ -1832,6 +1832,7 @@ string contentDescriptionLogo
 string currentDevice
 string drehzahl
 string engineLoadString
+string environmentString
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string hello_blank_fragment
@@ -1845,7 +1846,6 @@ string path_password_eye_mask_visible
 string path_password_strike_through
 string pedalString
 string reload_List
-string remainingString
 string runtimeString
 string search_menu_title
 string selectDevice

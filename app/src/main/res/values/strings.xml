@@ -14,7 +14,7 @@
 
     <string name="runtimeString">Runtime</string>
     <string name="pedalString">Pedal Position</string>
-    <string name="remainingString">Remaining Fuel</string>
+    <string name="environmentString">Environment</string>
     <string name="vMaxString">V-Max</string>
     <string name="accelerationString">Acceleration</string>
     <string name="engineLoadString">Engine Load</string>

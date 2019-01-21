@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -44,7 +43,7 @@ public class OneFragment extends Fragment {
     private AppCompatActivity mThisAppCompat;
     private TextInputEditText mTextRuntime;
     private TextInputEditText mTextPedal;
-    private TextInputEditText mTextRemaining;
+    private TextInputEditText mTextEnvironment;
 
 
     //Variables for Bluetooth
@@ -126,7 +125,7 @@ public class OneFragment extends Fragment {
 
         mTextRuntime = mThisFragmentView.findViewById(R.id.runtime);
         mTextPedal = mThisFragmentView.findViewById(R.id.text_pedal);
-        mTextRemaining = mThisFragmentView.findViewById(R.id.text_remaining);
+        mTextEnvironment = mThisFragmentView.findViewById(R.id.text_remaining);
         mShiftImage = mThisFragmentView.findViewById(R.id.image_shift);
         mSpeedometerEco = mThisFragmentView.findViewById(R.id.speedometer_eco);
 
@@ -206,13 +205,11 @@ public class OneFragment extends Fragment {
         Toast.makeText(mThisFragmentView.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
     }
 
-    public void handleRpm(String rpmValue) {
+    public void handleRpm(String rpmValue,double currentSpeed) {
         try {
-            //mShortenedString = rpmValue.substring(1);
             Log.d("OneFrag RPM Value:", rpmValue);
             float currentRoundsPerMinute = Float.parseFloat(rpmValue.substring(1));
-            Log.d("Eco Activity", "Reached starts with A, Drehzahl: " + currentRoundsPerMinute);
-            giveShiftReccomendation(Math.round(currentRoundsPerMinute));
+            giveShiftReccomendation(Math.round(currentRoundsPerMinute),currentSpeed);
             mSpeedometerEco.speedTo(currentRoundsPerMinute);
 
         } catch (Exception e) {
@@ -243,9 +240,11 @@ public class OneFragment extends Fragment {
         }
     }
 
-    public void handleRemaining(String remainingValue) {
+    public void handleEnvironment(String remainingValue) {
         mShortenedString = remainingValue.substring(1);
-        mTextRemaining.setText(mShortenedString + " %");
+        double environment = Double.parseDouble(mShortenedString);
+        environment /= 10;
+        mTextEnvironment.setText(environment + " °C");
     }
 
 
@@ -258,7 +257,7 @@ public class OneFragment extends Fragment {
     /**
      * Depending on the current rpm, the app suggests to shift up or downwards
      */
-    private void giveShiftReccomendation(int rpm) {
+    private void giveShiftReccomendation(int rpm,double speed) {
         if (rpm > 30) {
             mShiftImage.setImageResource(R.drawable.shift_up);
             mRpmCounter++;
@@ -267,10 +266,18 @@ public class OneFragment extends Fragment {
                 mRpmCounter = 0;
             }
         } else if (rpm < 15) {
-            mShiftImage.setImageResource(R.drawable.shift_down);
-            if(mRpmCounter > 8){
-                sendToThinkSpeak(0);
-                mRpmCounter = 0;
+            try{
+                if(speed <= 10){
+                    mShiftImage.setImageResource(R.drawable.shift_ok);
+                }else{
+                    mShiftImage.setImageResource(R.drawable.shift_down);
+                    if(mRpmCounter > 8){
+                        sendToThinkSpeak(0);
+                        mRpmCounter = 0;
+                    }
+                }
+            }catch (Exception e){
+                Log.e("OneFrag Shift", "Error occurred", e);
             }
         } else {
             mShiftImage.setImageResource(R.drawable.shift_ok);

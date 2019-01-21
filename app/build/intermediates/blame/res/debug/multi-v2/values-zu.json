@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\src\\HNU\\umbenennmich\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zu\\values-zu.xml",
+            "outputFile": "C:\\src\\HNU\\umbenennmich2\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zu\\values-zu.xml",
             "map": [
                 {
                     "source": "C:\\Users\\MAign\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.1.0-alpha01.aar\\2150970df98d40defd821542e5692a44\\res\\values-zu\\values-zu.xml",

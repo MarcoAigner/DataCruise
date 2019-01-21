@@ -1,24 +1,14 @@
 package com.example.maign.car_it_projekt;
 
 
-import android.content.Context;
 import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 
 import android.util.Log;
 
 import android.view.View;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -60,7 +50,8 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     private Sensor senAccelerometer;
 
 
-
+    //Saves the current speed
+    private double mSpeed;
 
 
     //Eco Values
@@ -256,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     @Override
     public void onEcoSent(String msg) {
        if(msg.startsWith("A")){
-           oneFrag.handleRpm(msg);
+           oneFrag.handleRpm(msg,mSpeed);
 
        }
 
@@ -271,7 +262,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
        }
 
        if(msg.startsWith("D")){
-           oneFrag.handleRemaining(msg);
+           oneFrag.handleEnvironment(msg);
        }
 
 
@@ -291,6 +282,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         }
 
         if(msg.startsWith("E")){
+            mSpeed = Double.parseDouble(msg.substring(1));
             twoFrag.handleSpeed(msg);
         }
 
