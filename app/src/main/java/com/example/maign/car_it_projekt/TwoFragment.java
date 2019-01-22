@@ -65,17 +65,6 @@ public class TwoFragment extends Fragment {
         return mThisFragmentView;
     }
 
-   /* @Override
-    public void onPause(){
-        super.onPause();
-        mBTManager.cancel();
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-        mBTManager.connect(mBluetoothAddress);
-    }*/
 
     private void setupElements() {
 
@@ -90,6 +79,7 @@ public class TwoFragment extends Fragment {
 
     }
 
+    //Setup the speed meter
     private void configureSpeedMeter() {
         mSpeedoMeterSport.setMinMaxSpeed((float) 0.0, (float) 250.0);
         mSpeedoMeterSport.setUnitUnderSpeedText(false);
@@ -99,6 +89,8 @@ public class TwoFragment extends Fragment {
 
     }
 
+    /*method that takes the speed as input
+    and sets the speed gauge accordingly*/
     void handleSpeed(String speed) {
         float speedFloat = Float.parseFloat(speed.substring(1));
         double speedDouble = Double.parseDouble(speed.substring(1));
@@ -110,15 +102,21 @@ public class TwoFragment extends Fragment {
         mSpeedoMeterSport.speedTo(speedFloat);
     }
 
+    /*method that takes the engine load as input
+    and sets the corresponding text accordingly*/
     void handleEngineLoad(String engineLoad) {
         String value = engineLoad.substring(1);
         mTextEngineLoad.setText(String.format(getString(R.string.engineLoadContent), value));
     }
 
+    /*method that takes the temperature as input
+    and sets the corresponding text accordingly*/
     void handleTemperature(String temperature) {
         mTextTemperature.setText(String.format(getString(R.string.temperatureContent), temperature.substring(1)));
     }
 
+    /*method that takes the rpm as input
+    and sets the corresponding text accordingly*/
     void handleRpm(String rpm) {
         double doubleRpm = Double.parseDouble(rpm.substring(1));
         doubleRpm *= 100;
