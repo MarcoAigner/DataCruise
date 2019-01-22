@@ -13,7 +13,7 @@ Users can switch between these two modes seamlessly using the tabs at the top of
 ## Presentation
 Click the image below to view a showcase on Youtube:
   
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=pH8dUQXGjCs" target="_blank">
+<a href="https://youtu.be/IighZKd0qyA" target="_blank">
   <img src="https://i.imgur.com/WMihwCF.jpg" alt="Data Cruise YouTube Preview" />
 </a>
 
