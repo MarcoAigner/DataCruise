@@ -83,14 +83,9 @@ public class OneFragment extends Fragment {
     }
 
 
-    /**
-     * Setting up all the elements.
-     * Linking the xml elements to their java counterparts.
-     * <p>
-     * <p>
-     * DELETE LATER
-     * Setting an icon and a listener to the mock start button
-     */
+    /*
+     Setting up all the elements.
+     Linking the xml elements to their java counterparts*/
     private void setupElements() {
 
         mTextRuntime = mThisFragmentView.findViewById(R.id.runtime);
@@ -105,9 +100,8 @@ public class OneFragment extends Fragment {
     }
 
 
-    /**
-     * Method to set up the speedometer as wished
-     */
+
+     // Method to set up the speedometer as wished
     private void configureSpeedMeter() {
 
         mSpeedometerEco.setUnit("x100 rpm");
@@ -120,16 +114,14 @@ public class OneFragment extends Fragment {
     }
 
 
-    /*
-     * As the creation of an error toast has shown to be redundant, a simple method has been written
-     * for this purpose
-     *
-
-     */
+    /* As the creation of an error toast has shown to be redundant,
+    a simple method has been written for this purpose*/
     private void showErrorToast(Exception e) {
         Toast.makeText(mThisFragmentView.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
     }
 
+    /*method that takes the rpm and current speed as input
+    and sets the speed gauge accordingly*/
     void handleRpm(String rpmValue, double currentSpeed) {
         try {
             Log.d("OneFrag RPM Value:", rpmValue);
@@ -144,6 +136,8 @@ public class OneFragment extends Fragment {
 
     }
 
+    /*method that takes the runtime as input
+    and sets the corresponding text accordingly*/
     void handleRuntime(String runtimeValue) {
         try {
             String value = runtimeValue.substring(1);
@@ -156,6 +150,8 @@ public class OneFragment extends Fragment {
         }
     }
 
+    /*method that takes the pedal position  as input
+    and sets the corresponding text accordingly*/
     void handlePedalPosition(String pedalValue) {
         try {
             String value = pedalValue.substring(1);
@@ -165,6 +161,8 @@ public class OneFragment extends Fragment {
         }
     }
 
+    /*method that takes the environment temperature as input
+    and sets the corresponding text accordingly*/
     void handleEnvironment(String environmentValue) {
         String value = environmentValue.substring(1);
         Log.d("Handle Environment: ", environmentValue);
@@ -175,9 +173,7 @@ public class OneFragment extends Fragment {
     }
 
 
-    /**
-     * Depending on the current rpm, the app suggests to shift up or downwards
-     */
+    //Depending on the current rpm, the app suggests to shift up or downwards
     private void giveShiftReccomendation(int rpm, double speed) {
         if (rpm > 30) {
             mShiftImage.setImageResource(R.drawable.shift_up);
@@ -206,6 +202,9 @@ public class OneFragment extends Fragment {
         }
     }
 
+    /*handles the server connection to the thingspeak sever
+    transmits a value given by a parameter
+    handles server responses*/
     private void sendToThinkSpeak(int value) {
 // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(mThisFragmentView.getContext());

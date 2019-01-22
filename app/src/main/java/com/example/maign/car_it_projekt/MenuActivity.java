@@ -72,13 +72,11 @@ public class MenuActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * Setting up all the elements.
-     * Linking xml elements to their java counterparts
-     * Setting connect button to not be enabled on startup
-     * Setting various listeners through methods
-     * Getting the bluetooth adapter
-     */
+    /*Setting up all the elements.
+     Linking xml elements to their java counterparts
+     Setting connect button to not be enabled on startup
+     Setting various listeners through methods
+     Getting the bluetooth adapter*/
     private void setupElements() {
         mListView = findViewById(R.id.listView);
         mTextInputEditText = findViewById(R.id.textInput);
@@ -102,16 +100,13 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * Show a welcome dialog which in a funny way encourages the user to not risk
-     * his or her life and so not control the phone while driving
-     */
+    /*Show a welcome dialog which in a funny way encourages the user to not risk
+     his or her life and so not control the phone while driving*/
     private void showWelcomeDialog() {
         AlertDialog.Builder welcomeAlert = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
         final ViewGroup nullParent = null;
         View view = inflater.inflate(R.layout.welcome_dialog, nullParent);
-        final Typeface typeface = ResourcesCompat.getFont(this, R.font.abel_regular);
         welcomeAlert.setView(view);
         welcomeAlert.setTitle(R.string.welcomeDiagTitle);
         welcomeAlert.setMessage(R.string.welcomeDiagMsg);
@@ -119,14 +114,10 @@ public class MenuActivity extends AppCompatActivity {
         welcomeAlert.show();
 
 
-
-
     }
 
 
-    /**
-     * Method creating a bluetooth manager instance
-     */
+    //Method creating a bluetooth manager instance
     private void createBtManager(Activity activity) {
         try {
             mBTManager = new BTManager(activity);
@@ -137,6 +128,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
+    //Returns listener for the welcome dialog button
     private DialogInterface.OnClickListener createAcceptWelcomeListener() {
         return new DialogInterface.OnClickListener() {
             @Override
@@ -156,11 +148,9 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * Method to get two lists of paired bluetooth devices
-     * The first includes all paired devices
-     * The second only includes ones which start with 'HC' to increase comfort
-     */
+    /*Method to get two lists of paired bluetooth devices
+     The first includes all paired devices
+     The second only includes ones which start with 'HC' to increase comfort*/
     private void pairedDevicesLists() {
 
         if (!bluetoothAdapter.isEnabled()) {
@@ -168,18 +158,21 @@ public class MenuActivity extends AppCompatActivity {
             return;
         }
 
+        //Create list of all devices
         if (mAllDevicesList.isEmpty()) {
             mAllDevicesList = mBTManager.getPairedDeviceInfos();
         }
+        //Create list of only arduino devices
         if (mArduinoList.isEmpty()) {
             extractArduinoDevices(mAllDevicesList, mArduinoList);
         }
 
+        //Set our custom font to the lists using the adapter
         final Typeface typeface = ResourcesCompat.getFont(this, R.font.abel_regular);
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mArduinoList){
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mArduinoList) {
             @Override
             @NonNull
-            public View getView(int position, View convertView,@NonNull ViewGroup parent) {
+            public View getView(int position, View convertView, @NonNull ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 TextView text = view.findViewById(android.R.id.text1);
                 text.setTypeface(typeface);
@@ -191,10 +184,10 @@ public class MenuActivity extends AppCompatActivity {
 
     }
 
-    /*
-     * Method to extract all 'HC*' Arduino devices from the greater allDevices list
-     * Put this code into a separate method to not having to rerun it again on its parent method's rerun
-     */
+    /*Method to extract all 'HC*' Arduino
+    devices from the greater allDevices list
+     Put this code into a separate method to not
+     having to rerun it again on its parent method's rerun*/
     private void extractArduinoDevices(ArrayList<String> extractFromList, ArrayList<String> extractIntoList) {
         for (String string : extractFromList) {
 
@@ -210,11 +203,8 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    /*
-     * Method that returns the onClick behaviour for the reload button
-     * In this case, pairedDevices() is rerun
-     *
-     */
+    /*Method that returns the onClick behaviour for the reload button
+    In this case, pairedDevices() is rerun*/
     private MaterialButton.OnClickListener setReloadListener() {
         return new View.OnClickListener() {
             @Override
@@ -224,11 +214,9 @@ public class MenuActivity extends AppCompatActivity {
         };
     }
 
-    /*
-     * Method that returns onClick behaviour for the connect button.
-     * In this case, an intent to the mainActivity is created and the bluetoothAddress is stored into it
-
-     */
+    /*Method that returns onClick behaviour for the connect button.
+    In this case, an intent to the mainActivity is created and the
+   bluetoothAddress is stored into it*/
     private View.OnClickListener setSwitchToTabsListener() {
         return new View.OnClickListener() {
             @Override
@@ -241,22 +229,19 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    /*
-     * Method that returns the onChecked behaviour for the switch
-     * If activated it fills the list view with the allDevices list
-     * In reverse, only the 'HC' devices are used
-
-     */
+    /*Method that returns the onChecked behaviour for the switch
+    If activated it fills the list view with the allDevices list
+    In reverse, only the 'HC' devices are used*/
     private CompoundButton.OnCheckedChangeListener setSwitchOnChangeListener() {
-       final Typeface typeface = ResourcesCompat.getFont(this, R.font.abel_regular);
+        final Typeface typeface = ResourcesCompat.getFont(this, R.font.abel_regular);
         return new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, mArduinoList){
+                    mAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, mArduinoList) {
                         @Override
                         @NonNull
-                        public View getView(int position, View convertView,@NonNull ViewGroup parent) {
+                        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
                             View view = super.getView(position, convertView, parent);
                             TextView text = view.findViewById(android.R.id.text1);
                             text.setTypeface(typeface);
@@ -266,10 +251,10 @@ public class MenuActivity extends AppCompatActivity {
                     mListView.setAdapter(mAdapter);
                     mListView.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
                 } else {
-                    mAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, mAllDevicesList){
+                    mAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, mAllDevicesList) {
                         @Override
                         @NonNull
-                        public View getView(int position, View convertView,@NonNull ViewGroup parent) {
+                        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
                             View view = super.getView(position, convertView, parent);
                             TextView text = view.findViewById(android.R.id.text1);
                             text.setTypeface(typeface);
@@ -284,12 +269,10 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * Method that returns an OnItemClick Listener for the ListView
-     * If an Item is selected, the bluetooth address and device name get stored into global variables
-     * The user gets informed about them in a seperate text view
-     * Finally the connect button becomes clickable
-     */
+    /*Method that returns an OnItemClick Listener for the ListView
+      If an Item is selected, the bluetooth address and device name get stored into global variables
+      The user gets informed about them in a seperate text view
+      Finally the connect button becomes clickable*/
     private AdapterView.OnItemClickListener myListClickListener = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView av, View v, int arg2, long arg3) {
             // Get the device MAC address, the last 17 chars in the View

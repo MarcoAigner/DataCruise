@@ -1,6 +1,7 @@
 package com.example.maign.car_it_projekt;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,15 +49,6 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
             R.drawable.ic_dashboard
     };
 
-    private int[] tabColors = {
-            R.color.lightGreen,
-            R.color.lightMaterialRed
-    };
-
-    public MainActivity() {
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -87,12 +79,14 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
 
     }
 
+    //Cancel the bluetooth connection on App stop
     @Override
     protected void onStop() {
         super.onStop();
         mBTManager.cancel();
     }
 
+    //Reconnect on App restart
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -100,9 +94,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     }
 
 
-    /**
-     * Setting up tab icons
-     */
+    //Setting up tab icons
     private void setupTabIcons() {
         try {
             if (tabLayout != null) {
@@ -120,10 +112,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         }
     }
 
-    /*
-     * Setting up a viewpager with fragments
-
-     */
+    //Setting up a viewpager with fragments
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(oneFrag, "ECO ");
@@ -131,10 +120,8 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         viewPager.setAdapter(adapter);
     }
 
-    /**
-     * Extract the bluetooth address attached to the intent from menu activity
-     * and save it into the variable mBluetoothAddress
-     */
+    /* Extract the bluetooth address attached to the intent from menu activity
+     and save it into the variable mBluetoothAddress*/
     private void getBluetoothAddress() {
         Bundle extras = getIntent().getExtras();
         try {
@@ -148,11 +135,9 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
 
     }
 
-    /**
-     * Setting up the elements.
-     * Linking java objects to their xml counterparts.
-     * setting viewpager
-     */
+    /*Setting up the elements.
+     Linking java objects to their xml counterparts.
+      setting viewpager*/
     private void setupElements() {
         //Layout Elements
         mParentView = findViewById(R.id.Coordinator_Main);
@@ -168,33 +153,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         //Layout Elements
         mParentView = findViewById(R.id.Coordinator_Main);
         tabLayout = findViewById(R.id.tabs);
-
-
         tabLayout.setupWithViewPager(viewPager);
-
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 0) {
-                    tabLayout.setSelectedTabIndicatorColor(tabColors[0]);
-                } else if (tab.getPosition() == 1) {
-                    tabLayout.setSelectedTabIndicatorColor(tabColors[1]);
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-
         highRpmCounter = 0;
 
         TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/abel_regular.ttf");
@@ -203,10 +162,13 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     }
 
 
+    //Method to handily show an Error Snackbar
     private void showErrorSnackbar(Exception e) {
         Snackbar.make(mParentView, "An error occured: " + e, Snackbar.LENGTH_LONG).show();
     }
 
+    /*Checks the incoming message for the beginning letter
+    to then start the corresponding method from oneFrag*/
     @Override
     public void onEcoSent(String msg) {
         if (msg.startsWith("A")) {
@@ -231,6 +193,9 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
 
     }
 
+
+    /*Checks the incoming message for the beginning letter
+    to then start the corresponding method from twoFrag*/
     @Override
     public void onSportSent(String msg) {
 
@@ -255,11 +220,9 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     }
 
 
-    /**
-     * Adapter class to handle the two fragments inside the tab layout
-     * The inherited method are rather self explaining.
-     * Because of that this class is not further commented
-     */
+    /*Adapter class to handle the two fragments inside the tab layout
+     The inherited method are rather self explaining.
+     Because of that this class is not further commented*/
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -291,11 +254,12 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     }
 
 
-    /**
-     * Message handler to handle incoming values
-     */
+    //Message handler to handle incoming values
     private void createMsgHandler() {
         mBTHandler = new BTMsgHandler() {
+
+            //Handles incoming messages
+            //HERE HAPPENS THE MAGIC
             @Override
             void receiveMessage(String msg) {
                 onEcoSent(msg);
@@ -320,10 +284,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
             }
 
 
-            /**
-             * Falls Fehler auftritt, zeige ihn dem Nutzer
-             * @param e
-             */
+            //If error occurs show it to the user
             @Override
             void handleException(Exception e) {
                 showErrorSnackbar(e);
@@ -331,9 +292,8 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         };
     }
 
-    /**
-     * Creation of a bluetooth manager
-     */
+
+    //Creation of a bluetooth manager
     private void createBtManager() {
         try {
             mBTManager = new BTManager(this, mBTHandler);
@@ -345,6 +305,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     }
 
 
+    //Initialize the connection on activity start
     private void initializeConnection() {
         mBTManager.connect(mBluetoothAddress);
     }
