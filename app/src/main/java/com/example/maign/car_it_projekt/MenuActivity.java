@@ -1,12 +1,15 @@
 package com.example.maign.car_it_projekt;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -108,11 +111,14 @@ public class MenuActivity extends AppCompatActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         final ViewGroup nullParent = null;
         View view = inflater.inflate(R.layout.welcome_dialog, nullParent);
+        final Typeface typeface = ResourcesCompat.getFont(this, R.font.abel_regular);
         welcomeAlert.setView(view);
         welcomeAlert.setTitle(R.string.welcomeDiagTitle);
         welcomeAlert.setMessage(R.string.welcomeDiagMsg);
         welcomeAlert.setPositiveButton(R.string.welcomeButtonAccept, createAcceptWelcomeListener());
         welcomeAlert.show();
+
+
 
 
     }
@@ -169,16 +175,17 @@ public class MenuActivity extends AppCompatActivity {
             extractArduinoDevices(mAllDevicesList, mArduinoList);
         }
 
-
-        try {
-            Log.d("Menu Activity", "mAllDevicesList (0)" + mAllDevicesList);
-            Log.d("Menu Activity", "mArduinoList (0)" + mArduinoList.get(0));
-        } catch (Exception e) {
-            Log.d("Menu Activity", "Devices List log failed");
-        }
-
-
-        mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mArduinoList);
+        final Typeface typeface = ResourcesCompat.getFont(this, R.font.abel_regular);
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mArduinoList){
+            @Override
+            @NonNull
+            public View getView(int position, View convertView,@NonNull ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView text = view.findViewById(android.R.id.text1);
+                text.setTypeface(typeface);
+                return view;
+            }
+        };
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
 
@@ -241,15 +248,34 @@ public class MenuActivity extends AppCompatActivity {
 
      */
     private CompoundButton.OnCheckedChangeListener setSwitchOnChangeListener() {
+       final Typeface typeface = ResourcesCompat.getFont(this, R.font.abel_regular);
         return new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, mArduinoList);
+                    mAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, mArduinoList){
+                        @Override
+                        @NonNull
+                        public View getView(int position, View convertView,@NonNull ViewGroup parent) {
+                            View view = super.getView(position, convertView, parent);
+                            TextView text = view.findViewById(android.R.id.text1);
+                            text.setTypeface(typeface);
+                            return view;
+                        }
+                    };
                     mListView.setAdapter(mAdapter);
                     mListView.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
                 } else {
-                    mAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, mAllDevicesList);
+                    mAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, mAllDevicesList){
+                        @Override
+                        @NonNull
+                        public View getView(int position, View convertView,@NonNull ViewGroup parent) {
+                            View view = super.getView(position, convertView, parent);
+                            TextView text = view.findViewById(android.R.id.text1);
+                            text.setTypeface(typeface);
+                            return view;
+                        }
+                    };
                     mListView.setAdapter(mAdapter);
                     mListView.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
                 }
