@@ -1,18 +1,14 @@
 package com.example.maign.car_it_projekt;
 
 
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.Bundle;
-
 import android.util.Log;
-
 import android.view.View;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -30,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     private TabLayout tabLayout;
     private OneFragment oneFrag;
     private TwoFragment twoFrag;
-    private FloatingActionButton mFab;
 
 
     //Saved the layout into a view attribute in order to refer to it when using snackbars
@@ -40,26 +35,11 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     private BTManager mBTManager;
     private BTMsgHandler mBTHandler; // Our main handler that will receive callback notifications
     private String mBluetoothAddress;
-    private boolean mIsConnected;
-    private boolean mCouldGetAdress;
-    private boolean mCouldSetUpManager;
-    int counter;
-
-    //Acceleration
-    private SensorManager senSensorManager;
-    private Sensor senAccelerometer;
+    int highRpmCounter;
 
 
     //Saves the current speed
     private double mSpeed;
-
-
-    //Eco Values
-    private String mRpm, mRuntime, mSpaceholder, mRemaining, mShift;
-
-
-    //Sport Values
-    private String mVelocity, mAcceleration, mEngineLoad, mTemperature;
 
 
     //Small array in which the tabs icons are stored
@@ -68,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
             R.drawable.ic_dashboard
     };
 
-    private int[] tabColors ={
+    private int[] tabColors = {
             R.color.lightGreen,
             R.color.lightMaterialRed
     };
@@ -108,22 +88,16 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
         mBTManager.cancel();
     }
 
     @Override
-    protected void onRestart(){
+    protected void onRestart() {
         super.onRestart();
         mBTManager.connect(mBluetoothAddress);
     }
-
-
-
-
-
-
 
 
     /**
@@ -131,17 +105,24 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
      */
     private void setupTabIcons() {
         try {
-            tabLayout.getTabAt(0).setIcon(tabIcons[0]);
-            tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+            if (tabLayout != null) {
+                if (tabLayout.getTabAt(0) != null) {
+                    tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+                }
+                if (tabLayout.getTabAt(1) != null) {
+                    tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+                }
+            }
+
+
         } catch (NullPointerException e) {
             showErrorSnackbar(e);
         }
     }
 
-    /**
+    /*
      * Setting up a viewpager with fragments
-     *
-     * @param viewPager
+
      */
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -157,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     private void getBluetoothAddress() {
         Bundle extras = getIntent().getExtras();
         try {
-            if(extras != null){
+            if (extras != null) {
                 mBluetoothAddress = extras.getString("BT_ADDRESS");
             }
         } catch (NullPointerException e) {
@@ -189,19 +170,17 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         tabLayout = findViewById(R.id.tabs);
 
 
-
         tabLayout.setupWithViewPager(viewPager);
-
 
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-               if(tab.getPosition() == 0){
-                   tabLayout.setSelectedTabIndicatorColor(tabColors[0]);
-               }else if(tab.getPosition() == 1){
-                   tabLayout.setSelectedTabIndicatorColor(tabColors[1]);
-               }
+                if (tab.getPosition() == 0) {
+                    tabLayout.setSelectedTabIndicatorColor(tabColors[0]);
+                } else if (tab.getPosition() == 1) {
+                    tabLayout.setSelectedTabIndicatorColor(tabColors[1]);
+                }
             }
 
             @Override
@@ -216,27 +195,9 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         });
 
 
-
-        counter = 0;
-
-
-
-
-        //Eco Values
-        mRpm = "";
-        mRuntime = "";
-        mSpaceholder = "";
-        mRemaining = "";
-        mShift = "";
-
-        //Sport Values
-        mVelocity = "";
-        mEngineLoad = "";
-        mTemperature = "";
+        highRpmCounter = 0;
 
         TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/abel_regular.ttf");
-
-
 
 
     }
@@ -248,30 +209,24 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
 
     @Override
     public void onEcoSent(String msg) {
-       if(msg.startsWith("A")){
-           oneFrag.handleRpm(msg,mSpeed);
+        if (msg.startsWith("A")) {
+            oneFrag.handleRpm(msg, mSpeed);
 
-       }
+        }
 
-        if(msg.startsWith("B")){
+        if (msg.startsWith("B")) {
             oneFrag.handleRuntime(msg);
 
         }
 
-       if(msg.startsWith("C")){
-           oneFrag.handlePedalPosition(msg);
+        if (msg.startsWith("C")) {
+            oneFrag.handlePedalPosition(msg);
 
-       }
+        }
 
-       if(msg.startsWith("D")){
-           oneFrag.handleEnvironment(msg);
-       }
-
-
-
-
-
-
+        if (msg.startsWith("D")) {
+            oneFrag.handleEnvironment(msg);
+        }
 
 
     }
@@ -279,28 +234,25 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     @Override
     public void onSportSent(String msg) {
 
-        if(msg.startsWith("A")){
+        if (msg.startsWith("A")) {
             twoFrag.handleRpm(msg);
         }
 
-        if(msg.startsWith("E")){
+        if (msg.startsWith("E")) {
             mSpeed = Double.parseDouble(msg.substring(1));
             twoFrag.handleSpeed(msg);
         }
 
-        if(msg.startsWith("G")){
+        if (msg.startsWith("G")) {
             twoFrag.handleEngineLoad(msg);
         }
 
-        if(msg.startsWith("H")){
+        if (msg.startsWith("H")) {
             twoFrag.handleTemperature(msg);
         }
 
 
     }
-
-
-
 
 
     /**
@@ -312,11 +264,12 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
-        public ViewPagerAdapter(FragmentManager manager) {
+        ViewPagerAdapter(FragmentManager manager) {
             super(manager);
         }
 
         @Override
+        @NonNull
         public Fragment getItem(int position) {
             return mFragmentList.get(position);
         }
@@ -326,7 +279,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
             return mFragmentList.size();
         }
 
-        public void addFragment(Fragment fragment, String title) {
+        void addFragment(Fragment fragment, String title) {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
@@ -384,7 +337,6 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     private void createBtManager() {
         try {
             mBTManager = new BTManager(this, mBTHandler);
-            mCouldSetUpManager = true;
             Log.d("Eco Activity", "Manager created");
 
         } catch (Exception e) {
@@ -393,22 +345,9 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     }
 
 
-
-
-
-
-
-    private void initializeConnection(){
+    private void initializeConnection() {
         mBTManager.connect(mBluetoothAddress);
     }
-
-
-
-
-
-
-
-
 
 
 }

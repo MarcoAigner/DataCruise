@@ -2,7 +2,8 @@ package com.example.maign.car_it_projekt;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -27,39 +28,15 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import static java.lang.Math.round;
-
-
-//import info.androidhive.materialtabs.R;
-
 
 public class OneFragment extends Fragment {
 
 
-    private int mCurrentSpeed;
-
     //Layout Elements
     private View mThisFragmentView;
-    private AppCompatActivity mThisAppCompat;
     private TextInputEditText mTextRuntime;
     private TextInputEditText mTextPedal;
     private TextInputEditText mTextEnvironment;
-
-
-    //Variables for Bluetooth
-    private BTManager mBTManager;
-    private BTMsgHandler mBTHandler; // Our main handler that will receive callback notifications
-    private String mBluetoothAddress;
-    private boolean mIsConnected;
-    private boolean mCouldGetAdress;
-    private boolean mCouldSetUpManager;
-
-    //Other Variables
-    private String mShortenedString = "";
-    private String mCurrentMsg;
-    private View.OnClickListener mBtStartButtonListener;
-
-
 
 
     //Speedometer
@@ -68,10 +45,6 @@ public class OneFragment extends Fragment {
     //Shift
     private ImageView mShiftImage;
 
-
-
-    //Interface to communicate
-    private EcoFragmentReceiver ecoFragmentReceiver;
 
     //Counter on how long rpm is too high
     private int mRpmCounter;
@@ -92,7 +65,8 @@ public class OneFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
@@ -107,7 +81,6 @@ public class OneFragment extends Fragment {
 
         return mThisFragmentView;
     }
-
 
 
     /**
@@ -132,9 +105,6 @@ public class OneFragment extends Fragment {
     }
 
 
-
-
-
     /**
      * Method to set up the speedometer as wished
      */
@@ -150,21 +120,21 @@ public class OneFragment extends Fragment {
     }
 
 
-    /**
+    /*
      * As the creation of an error toast has shown to be redundant, a simple method has been written
      * for this purpose
      *
-     * @param e
+
      */
     private void showErrorToast(Exception e) {
         Toast.makeText(mThisFragmentView.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
     }
 
-    public void handleRpm(String rpmValue,double currentSpeed) {
+    void handleRpm(String rpmValue, double currentSpeed) {
         try {
             Log.d("OneFrag RPM Value:", rpmValue);
             float currentRoundsPerMinute = Float.parseFloat(rpmValue.substring(1));
-            giveShiftReccomendation(Math.round(currentRoundsPerMinute),currentSpeed);
+            giveShiftReccomendation(Math.round(currentRoundsPerMinute), currentSpeed);
             mSpeedometerEco.speedTo(currentRoundsPerMinute);
 
         } catch (Exception e) {
@@ -174,7 +144,7 @@ public class OneFragment extends Fragment {
 
     }
 
-    public void handleRuntime(String runtimeValue) {
+    void handleRuntime(String runtimeValue) {
         try {
             String value = runtimeValue.substring(1);
             double runtime = Float.parseFloat(value);
@@ -186,16 +156,16 @@ public class OneFragment extends Fragment {
         }
     }
 
-    public void handlePedalPosition(String pedalValue) {
+    void handlePedalPosition(String pedalValue) {
         try {
             String value = pedalValue.substring(1);
-            mTextPedal.setText(String.format(getString(R.string.pedalContent),value));
+            mTextPedal.setText(String.format(getString(R.string.pedalContent), value));
         } catch (Exception e) {
             showErrorToast(e);
         }
     }
 
-    public void handleEnvironment(String environmentValue) {
+    void handleEnvironment(String environmentValue) {
         String value = environmentValue.substring(1);
         Log.d("Handle Environment: ", environmentValue);
         double environment = Double.parseDouble(value);
@@ -205,35 +175,29 @@ public class OneFragment extends Fragment {
     }
 
 
-    private void resetValues() {
-        //
-        mSpeedometerEco.speedTo((float) 0.0);
-    }
-
-
     /**
      * Depending on the current rpm, the app suggests to shift up or downwards
      */
-    private void giveShiftReccomendation(int rpm,double speed) {
+    private void giveShiftReccomendation(int rpm, double speed) {
         if (rpm > 30) {
             mShiftImage.setImageResource(R.drawable.shift_up);
             mRpmCounter++;
-            if(mRpmCounter > 8){
+            if (mRpmCounter > 8) {
                 sendToThinkSpeak(1);
                 mRpmCounter = 0;
             }
         } else if (rpm < 15) {
-            try{
-                if(speed <= 10){
+            try {
+                if (speed <= 10) {
                     mShiftImage.setImageResource(R.drawable.shift_ok);
-                }else{
+                } else {
                     mShiftImage.setImageResource(R.drawable.shift_down);
-                    if(mRpmCounter > 8){
+                    if (mRpmCounter > 8) {
                         sendToThinkSpeak(0);
                         mRpmCounter = 0;
                     }
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 Log.e("OneFrag Shift", "Error occurred", e);
             }
         } else {
@@ -242,7 +206,7 @@ public class OneFragment extends Fragment {
         }
     }
 
-    public void sendToThinkSpeak(int value) {
+    private void sendToThinkSpeak(int value) {
 // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(mThisFragmentView.getContext());
         String url = "https://api.thingspeak.com/update?api_key=YLGI2F4QF01D4HHJ&field1=" + value;
@@ -253,21 +217,18 @@ public class OneFragment extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
-                        Snackbar.make(mThisFragmentView,"Response from server: "+response,Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(mThisFragmentView, "Response from server: " + response, Snackbar.LENGTH_SHORT).show();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Snackbar.make(mThisFragmentView,"Error from server: "+error,Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(mThisFragmentView, "Error from server: " + error, Snackbar.LENGTH_SHORT).show();
             }
         });
 
 // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
-
-
-
 
 
 }
