@@ -26,9 +26,6 @@
             </intent-filter>
 
         </activity>
-        <activity android:name="com.example.maign.car_it_projekt.AppStartActivity">
-
-        </activity>
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -19,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -35,16 +35,10 @@ public class MenuActivity extends AppCompatActivity {
     private MaterialButton mConnectButton;
 
 
-
-    //Listener variables
-    private CompoundButton.OnCheckedChangeListener mSwitchOnChangeListener;
-
     //Bluetooth related variables
     private BTManager mBTManager;
-    private BTMsgHandler mBTHandler;
     private BluetoothAdapter bluetoothAdapter;
     private String mBtAddress;
-    private String mDeviceName;
 
 
     private ArrayAdapter mAdapter;
@@ -61,7 +55,7 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menue);
 
         //Create a Bluetooth Manager
-        createBtManager(this, mBTHandler);
+        createBtManager(this);
 
         //Setup all Layout elements
         setupElements();
@@ -111,7 +105,8 @@ public class MenuActivity extends AppCompatActivity {
     private void showWelcomeDialog() {
         AlertDialog.Builder welcomeAlert = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
-        View view = inflater.inflate(R.layout.welcome_dialog, null);
+        final ViewGroup nullParent = null;
+        View view = inflater.inflate(R.layout.welcome_dialog, nullParent);
         welcomeAlert.setView(view);
         welcomeAlert.setTitle(R.string.welcomeDiagTitle);
         welcomeAlert.setMessage(R.string.welcomeDiagMsg);
@@ -125,9 +120,9 @@ public class MenuActivity extends AppCompatActivity {
     /**
      * Method creating a bluetooth manager instance
      */
-    private void createBtManager(Activity activity, BTMsgHandler handler) {
+    private void createBtManager(Activity activity) {
         try {
-            mBTManager = new BTManager(activity, handler);
+            mBTManager = new BTManager(activity);
             Log.d("Menu Activity", "Manager created");
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
@@ -136,7 +131,7 @@ public class MenuActivity extends AppCompatActivity {
 
 
     private DialogInterface.OnClickListener createAcceptWelcomeListener() {
-        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+        return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
@@ -151,8 +146,6 @@ public class MenuActivity extends AppCompatActivity {
 
             }
         };
-
-        return listener;
     }
 
 
@@ -184,10 +177,9 @@ public class MenuActivity extends AppCompatActivity {
         }
 
 
-
-            mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mArduinoList);
-            mListView.setAdapter(mAdapter);
-            mListView.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
+        mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mArduinoList);
+        mListView.setAdapter(mAdapter);
+        mListView.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
 
     }
 
@@ -224,10 +216,10 @@ public class MenuActivity extends AppCompatActivity {
         };
     }
 
-    /**
+    /*
      * Method that returns onClick behaviour for the connect button.
      * In this case, an intent to the mainActivity is created and the bluetoothAddress is stored into it
-     * @return
+
      */
     private View.OnClickListener setSwitchToTabsListener() {
         return new View.OnClickListener() {
@@ -241,32 +233,29 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    /**
+    /*
      * Method that returns the onChecked behaviour for the switch
      * If activated it fills the list view with the allDevices list
      * In reverse, only the 'HC' devices are used
-     * @return
+
      */
     private CompoundButton.OnCheckedChangeListener setSwitchOnChangeListener() {
-        mSwitchOnChangeListener = new CompoundButton.OnCheckedChangeListener() {
+        return new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, mAllDevicesList);
+                    mAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, mAllDevicesList);
                     mListView.setAdapter(mAdapter);
                     mListView.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
 
 
-
                 } else {
-                    mAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, mArduinoList);
+                    mAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, mArduinoList);
                     mListView.setAdapter(mAdapter);
                     mListView.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
                 }
             }
         };
-
-        return mSwitchOnChangeListener;
     }
 
 
@@ -282,14 +271,14 @@ public class MenuActivity extends AppCompatActivity {
             String info = ((TextView) v).getText().toString();
             //final String address = info.substring(info.length() - 17);
             mBtAddress = info.substring(info.length() - 17);
-            mDeviceName = info.substring(0, info.length() - 17);
+            String mDeviceName = info.substring(0, info.length() - 17);
 
             Log.d("Menu Activity:", "Bt Address:" + mBtAddress);
             Log.d("Menu Activity:", "Device Name:" + mDeviceName);
 
 
             try {
-                mTextInputEditText.setText(String.format(getString(R.string.menuDeviceString),mDeviceName,mBtAddress));
+                mTextInputEditText.setText(String.format(getString(R.string.menuDeviceString), mDeviceName, mBtAddress));
                 mConnectButton.setEnabled(true);
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "Oops! Something went wrong...", Toast.LENGTH_SHORT).show();

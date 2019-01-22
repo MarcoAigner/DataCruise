@@ -55,6 +55,22 @@ public class BTManager {
         }
     }
 
+    public BTManager(Activity act) throws Exception {
+
+
+        mBTAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBTAdapter == null) {
+            throw new Exception("Adapter not enabled");
+        } else {
+            if (mBTAdapter.isEnabled()) {
+            } else {
+                //Ask to the user turn the bluetooth on
+                Intent turnBTon = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                act.startActivityForResult(turnBTon, 1);
+            }
+        }
+    }
+
     /**
      * Get a list of names and MAC-Addresses of all paired devices
      */
