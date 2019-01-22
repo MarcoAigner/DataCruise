@@ -93,6 +93,7 @@ public class MenuActivity extends AppCompatActivity {
         mSwitch.setOnCheckedChangeListener(setSwitchOnChangeListener());
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mSwitch.setChecked(true);
 
 
     }
@@ -244,13 +245,11 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, mAllDevicesList);
+                    mAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, mArduinoList);
                     mListView.setAdapter(mAdapter);
                     mListView.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
-
-
                 } else {
-                    mAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, mArduinoList);
+                    mAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, mAllDevicesList);
                     mListView.setAdapter(mAdapter);
                     mListView.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
                 }

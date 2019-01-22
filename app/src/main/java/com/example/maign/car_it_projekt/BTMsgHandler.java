@@ -16,7 +16,7 @@ public abstract class BTMsgHandler extends Handler {
     public void handleMessage(android.os.Message msg) {
 
         if (msg.what == BTManager.MESSAGE_READ) {
-            String readMessage = null;
+            String readMessage;
             try {
                 readMessage = new String((byte[]) msg.obj, "UTF-8");
                 receiveMessage(readMessage);

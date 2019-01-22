@@ -5,7 +5,8 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorSecondary">@color/lightColorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
         <item name="android:typeface">serif</item>
     </style>
 
@@ -21,28 +22,26 @@
 
 
     <style name="AppTheme.Launcher">
-
         <item name="android:windowBackground">@drawable/launch_screen_drawable</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
-
-
-
-
     </style>
+
+    <style name="SwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="android:colorControlActivated">#125688</item>
+    </style>
+
+
 
 
 
     <style name="MyMaterialTheme" parent="MyMaterialTheme.Base"></style>
 
     <style name="MyMaterialTheme.Base" parent="Theme.MaterialComponents.Light.NoActionBar">
-
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
-
     </style>
 
 
