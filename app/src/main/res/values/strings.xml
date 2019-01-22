@@ -11,6 +11,7 @@
     <string name="connect">Connect</string>
     <string name="currentDevice">Current device</string>
     <string name="selectDevice">Please select an arduino device to connect</string>
+    <string name="menuDeviceString">%1s\n%2s</string>
 
     <string name="runtimeString">Runtime</string>
     <string name="pedalString">Pedal Position</string>
@@ -21,6 +22,15 @@
     <string name="temperatureString">Temperature</string>
     <string name="shiftString">Shift</string>
     <string name="drehzahl">Rpm</string>
+
+    <string name="runtimeContent">%1s\nminutes</string>
+    <string name="pedalContent">%1s %%</string>
+    <string name="environmentContent">%1s °C</string>
+
+    <string name="vMaxContent">%1s km/h</string>
+    <string name="engineLoadContent">%1s %%</string>
+    <string name="temperatureContent">%1s °C</string>
+    <string name="rpmContent">%1s rpm</string>
 
 
     <string name="welcomeDiagTitle">Welcome!</string>

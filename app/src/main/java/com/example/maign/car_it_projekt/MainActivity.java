@@ -157,7 +157,9 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
     private void getBluetoothAddress() {
         Bundle extras = getIntent().getExtras();
         try {
-            mBluetoothAddress = extras.getString("BT_ADDRESS");
+            if(extras != null){
+                mBluetoothAddress = extras.getString("BT_ADDRESS");
+            }
         } catch (NullPointerException e) {
             showErrorSnackbar(e);
         }

@@ -108,10 +108,7 @@ public class OneFragment extends Fragment {
         return mThisFragmentView;
     }
 
-    public void testUpdateElements(int testValA, int testValB) {
-        mTextRuntime.setText(String.valueOf(testValA));
-        mTextPedal.setText(String.valueOf(testValB));
-    }
+
 
     /**
      * Setting up all the elements.
@@ -135,49 +132,7 @@ public class OneFragment extends Fragment {
     }
 
 
-    /**
-     * OnClickListener Method for the start button.
-     * OnClick, a connection to the selected bt device is established
-     *
-     * @return
-     */
-    private View.OnClickListener createStartButtonListener() {
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    if (mBTManager != null) {
-                        //if (mCouldGetAdress == true) {
-                        if (mIsConnected == false) {
-                            //mBTManager.connect(mTestBTConnectionArduinoAdrdress);
 
-                            mIsConnected = true;
-                            //handleValues("A323B456C458D785E457F587G845H554I5418");
-                            //sendStringToThinkspeak("5678");
-                            mSpeedometerEco.speedTo(Float.parseFloat("30"));
-
-
-                        } else {
-                            mBTManager.cancel();
-                            //Toast.makeText(Eco_Activity.this, "Disconnected", Toast.LENGTH_SHORT).show();
-                            resetValues();
-
-                            mIsConnected = false;
-                        }
-                        /*} else {
-                            Toast.makeText(mThisFragmentView.getContext(), "No Bluetooth Address found", Toast.LENGTH_LONG);
-                        }*/
-                    } else {
-                        Toast.makeText(mThisFragmentView.getContext(), "Bluetooth Manager Null Exception", Toast.LENGTH_LONG);
-                    }
-                    Log.d("Eco Activity", "On Click setup");
-                } catch (Exception e) {
-                    Toast.makeText(mThisFragmentView.getContext(), e.getMessage(), Toast.LENGTH_LONG);
-                }
-            }
-        };
-        return listener;
-    }
 
 
     /**
@@ -221,11 +176,11 @@ public class OneFragment extends Fragment {
 
     public void handleRuntime(String runtimeValue) {
         try {
-            mShortenedString = runtimeValue.substring(1);
-            double runtime = Float.parseFloat(mShortenedString);
+            String value = runtimeValue.substring(1);
+            double runtime = Float.parseFloat(value);
             runtime /= 60;
             NumberFormat formatter = new DecimalFormat("#0");
-            mTextRuntime.setText(formatter.format(runtime) + "\nminutes");
+            mTextRuntime.setText(String.format(getString(R.string.runtimeContent), formatter.format(runtime)));
         } catch (Exception e) {
             Log.d("OneFrag Handle Runtime", e.toString());
         }
@@ -233,18 +188,20 @@ public class OneFragment extends Fragment {
 
     public void handlePedalPosition(String pedalValue) {
         try {
-            mShortenedString = pedalValue.substring(1);
-            mTextPedal.setText(mShortenedString + " %");
+            String value = pedalValue.substring(1);
+            mTextPedal.setText(String.format(getString(R.string.pedalContent),value));
         } catch (Exception e) {
             showErrorToast(e);
         }
     }
 
-    public void handleEnvironment(String remainingValue) {
-        mShortenedString = remainingValue.substring(1);
-        double environment = Double.parseDouble(mShortenedString);
+    public void handleEnvironment(String environmentValue) {
+        String value = environmentValue.substring(1);
+        Log.d("Handle Environment: ", environmentValue);
+        double environment = Double.parseDouble(value);
         environment /= 10;
-        mTextEnvironment.setText(environment + " °C");
+        NumberFormat formatter = new DecimalFormat("#0.0");
+        mTextEnvironment.setText(String.format(getString(R.string.environmentContent), formatter.format(environment)));
     }
 
 

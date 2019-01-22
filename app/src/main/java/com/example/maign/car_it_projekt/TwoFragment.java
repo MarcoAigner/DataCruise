@@ -45,7 +45,7 @@ public class TwoFragment extends Fragment {
     //Other Variables
     private String mshortenedString = "";
     private String mCurrentMsg;
-    private float vMax;
+    private double vMax;
 
 
     //Speed Meter
@@ -126,25 +126,28 @@ public class TwoFragment extends Fragment {
 
     public void handleSpeed(String speed){
         float speedFloat = Float.parseFloat(speed.substring(1));
-        if(speedFloat > vMax){
-            vMax = speedFloat;
+        double speedDouble = Double.parseDouble(speed.substring(1));
+        if(speedDouble > vMax){
+            vMax = speedDouble;
         }
-        mTextVMax.setText(vMax+" km/h");
+        NumberFormat formatter = new DecimalFormat("#0.00");
+        mTextVMax.setText(String.format(getString(R.string.vMaxContent),formatter.format(vMax)));
         mSpeedoMeterSport.speedTo(speedFloat);
     }
 
     public void handleEngineLoad(String engineLoad){
-        mTextEngineLoad.setText(engineLoad.substring(1)+" %");
+        String value = engineLoad.substring(1);
+        mTextEngineLoad.setText(String.format(getString(R.string.engineLoadContent),value));
     }
 
     public void handleTemperature(String temperature) {
-        mTextTemperature.setText(temperature.substring(1) + " °C");
+        mTextTemperature.setText(String.format(getString(R.string.temperatureContent),temperature.substring(1)));
     }
     public void handleRpm(String rpm){
         double doubleRpm = Double.parseDouble(rpm.substring(1));
         doubleRpm *= 100;
         NumberFormat formatter = new DecimalFormat("#0.0");
-        mTextRpm.setText(formatter.format(doubleRpm) +" rpm");
+        mTextRpm.setText(String.format(getString(R.string.rpmContent),formatter.format(doubleRpm)));
     }
 
     public void resetSportValues(){
