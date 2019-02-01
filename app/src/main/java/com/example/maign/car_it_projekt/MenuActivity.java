@@ -100,6 +100,7 @@ public class MenuActivity extends AppCompatActivity {
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mSwitch.setChecked(true);
+        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/abel_regular.ttf");
 
 
     }
@@ -108,15 +109,21 @@ public class MenuActivity extends AppCompatActivity {
     /*Show a welcome dialog which in a funny way encourages the user to not risk
      his or her life and so not control the phone while driving*/
     private void showWelcomeDialog() {
-        AlertDialog.Builder welcomeAlert = new AlertDialog.Builder(this);
+       /* AlertDialog.Builder welcomeAlert = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
         final ViewGroup nullParent = null;
         View view = inflater.inflate(R.layout.welcome_dialog, nullParent);
         welcomeAlert.setView(view);
-        welcomeAlert.setTitle(R.string.welcomeDiagTitle);
-        welcomeAlert.setMessage(R.string.welcomeDiagMsg);
+        //welcomeAlert.setTitle(R.string.welcomeDiagTitle);
+        //welcomeAlert.setMessage(R.string.welcomeDiagMsg);
         welcomeAlert.setPositiveButton(R.string.welcomeButtonAccept, createAcceptWelcomeListener());
-        welcomeAlert.show();
+        welcomeAlert.show();*/
+
+        WelcomeDialog welcomeDialog = new WelcomeDialog();
+        welcomeDialog.show(getSupportFragmentManager(),"Welcome Dialog");
+        welcomeDialog.setCancelable(false);
+
+
 
 
     }
