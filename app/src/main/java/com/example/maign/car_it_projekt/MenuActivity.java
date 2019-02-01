@@ -286,7 +286,7 @@ public class MenuActivity extends AppCompatActivity {
 
 
             try {
-                mTextInputEditText.setText(String.format(getString(R.string.menuDeviceString), mDeviceName, mBtAddress));
+                mTextInputEditText.setText(String.format(getString(R.string.menuDeviceString), mDeviceName,mBtAddress));
                 mConnectButton.setEnabled(true);
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "Oops! Something went wrong...", Toast.LENGTH_SHORT).show();
