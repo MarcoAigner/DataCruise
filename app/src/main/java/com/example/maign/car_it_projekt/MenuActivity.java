@@ -55,7 +55,7 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menue);
+        setContentView(R.layout.menue_constraint);
 
         //Create a Bluetooth Manager
         createBtManager(this);
