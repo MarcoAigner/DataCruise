@@ -70,7 +70,7 @@ public class OneFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        mThisFragmentView = inflater.inflate(R.layout.fragment_one, container, false);
+        mThisFragmentView = inflater.inflate(R.layout.fragment_one_constraint, container, false);
 
         //Set Up all the layout elements
         setupElements();

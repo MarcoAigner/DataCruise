@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -37,6 +38,8 @@ public class MenuActivity extends AppCompatActivity {
     private ListView mListView;
     private TextInputEditText mTextInputEditText;
     private MaterialButton mConnectButton;
+
+    private View mParentView;
 
 
     //Bluetooth related variables
@@ -83,6 +86,7 @@ public class MenuActivity extends AppCompatActivity {
         mTextInputEditText = findViewById(R.id.textInput);
         SwitchMaterial mSwitch = findViewById(R.id.switchHC);
         mConnectButton = findViewById(R.id.materialButton);
+        mParentView = findViewById(R.id.Constraint_Menu);
         MaterialButton mReloadButton = findViewById(R.id.reloadButton);
 
         mAllDevicesList = new ArrayList<>();
@@ -155,7 +159,7 @@ public class MenuActivity extends AppCompatActivity {
     private void pairedDevicesLists() {
 
         if (!bluetoothAdapter.isEnabled()) {
-            Toast.makeText(this, "Bluetooth is currently off!", Toast.LENGTH_LONG).show();
+            Snackbar.make(mParentView, "Bluetooth is currently off!", Snackbar.LENGTH_LONG).show();
             return;
         }
 

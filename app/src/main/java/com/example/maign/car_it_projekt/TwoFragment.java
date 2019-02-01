@@ -52,7 +52,7 @@ public class TwoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mThisFragmentView = inflater.inflate(R.layout.fragment_two, container, false);
+        mThisFragmentView = inflater.inflate(R.layout.fragment_two_constraint, container, false);
 
 
         //Set Up all the layout elements
