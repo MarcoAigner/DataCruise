@@ -22,11 +22,6 @@ public class WelcomeDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         //Get Layout Inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
-
-
-        
-
-        builder.setCancelable(false);
         builder.setView(inflater.inflate(R.layout.welcome_dialog, null))
                 .setPositiveButton(R.string.welcomeButtonAccept, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {

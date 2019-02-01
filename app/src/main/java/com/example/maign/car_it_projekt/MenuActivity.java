@@ -121,6 +121,7 @@ public class MenuActivity extends AppCompatActivity {
 
         WelcomeDialog welcomeDialog = new WelcomeDialog();
         welcomeDialog.show(getSupportFragmentManager(),"Welcome Dialog");
+        welcomeDialog.setCancelable(false);
 
 
 
