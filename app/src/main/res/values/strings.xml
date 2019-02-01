@@ -10,7 +10,7 @@
     <string name="contentDescriptionLogo">App Logo</string>
     <string name="connect">Connect</string>
     <string name="currentDevice">Current device</string>
-    <string name="selectDevice">Please select an arduino device to connect</string>
+    <string name="selectDevice">Select an arduino device to connect</string>
     <string name="menuDeviceString">%1s (%2s)</string>
 
     <string name="runtimeString">Runtime</string>

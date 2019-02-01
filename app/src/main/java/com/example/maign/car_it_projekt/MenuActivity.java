@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -176,6 +177,7 @@ public class MenuActivity extends AppCompatActivity {
                 View view = super.getView(position, convertView, parent);
                 TextView text = view.findViewById(android.R.id.text1);
                 text.setTypeface(typeface);
+                text.setTextColor(Color.BLACK);
                 return view;
             }
         };
