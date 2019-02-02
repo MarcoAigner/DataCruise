@@ -47,7 +47,8 @@ public class OneFragment extends Fragment {
 
 
     //Counter on how long rpm is too high
-    private int mRpmCounter;
+    private int mRpmCounterHigh;
+    private int mRpmCounterLow;
 
 
     public interface EcoFragmentReceiver {
@@ -94,7 +95,8 @@ public class OneFragment extends Fragment {
         mShiftImage = mThisFragmentView.findViewById(R.id.image_shift);
         mSpeedometerEco = mThisFragmentView.findViewById(R.id.speedometer_eco);
 
-        mRpmCounter = 0;
+        mRpmCounterHigh = 0;
+        mRpmCounterLow = 0;
 
 
     }
@@ -174,23 +176,27 @@ public class OneFragment extends Fragment {
 
 
     //Depending on the current rpm, the app suggests to shift up or downwards
+
     private void giveShiftReccomendation(int rpm, double speed) {
         if (rpm > 30) {
+            mRpmCounterLow = 0;
             mShiftImage.setImageResource(R.drawable.shift_up);
-            mRpmCounter++;
-            if (mRpmCounter > 8) {
+            mRpmCounterHigh++;
+            if (mRpmCounterHigh > 8) {
                 sendToThinkSpeak(1);
-                mRpmCounter = 0;
+                mRpmCounterHigh = 0;
             }
         } else if (rpm < 15) {
+            mRpmCounterHigh = 0;
             try {
                 if (speed <= 10) {
                     mShiftImage.setImageResource(R.drawable.shift_ok);
                 } else {
+                    mRpmCounterLow++;
                     mShiftImage.setImageResource(R.drawable.shift_down);
-                    if (mRpmCounter > 8) {
+                    if (mRpmCounterLow > 8) {
                         sendToThinkSpeak(0);
-                        mRpmCounter = 0;
+                        mRpmCounterLow = 0;
                     }
                 }
             } catch (Exception e) {
@@ -198,9 +204,12 @@ public class OneFragment extends Fragment {
             }
         } else {
             mShiftImage.setImageResource(R.drawable.shift_ok);
-            mRpmCounter = 0;
+            mRpmCounterHigh = 0;
+            mRpmCounterLow = 0;
         }
     }
+
+
 
     /*handles the server connection to the thingspeak sever
     transmits a value given by a parameter

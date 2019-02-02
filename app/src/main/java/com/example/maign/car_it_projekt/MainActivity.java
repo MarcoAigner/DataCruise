@@ -287,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements OneFragment.EcoFr
             //If error occurs show it to the user
             @Override
             void handleException(Exception e) {
-                showErrorSnackbar(e);
+                Snackbar.make(mParentView,"Connection failed",Snackbar.LENGTH_LONG).show();
             }
         };
     }
