@@ -3,8 +3,13 @@
 <br>
 
 ## About
-This app was built as a university project for the course "Car IT" of studies "Information Management Automotive" at University of Applied Sciences Neu-Ulm.  
-It provides two modes:  
+This app was built as a university project for the course "Car IT" during the third semester of studies "Information Management Automotive" at University of Applied Sciences Neu-Ulm.
+
+The app displays information from a car's ecu (electronic control unit) in real-time.
+It gets its information from an arduino uno mini-computer, which is itself connected to the car via the standardized OBD(on-board-diagnostics)-port.
+Communication between the arduino uno and the app happens using the bluetooth technology
+
+The app provides two modes:  
   - **Eco mode** aids in driving more fuel efficently by providing information about the current rpm, shift advice and similar information.
   - **Sports mode** provides information useful for a sporty driving style. Keeps track of the engine load, (max-) speed, rpm and other.
   
